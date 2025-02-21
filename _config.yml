@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 雨沫喵~
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: 雨沫
+language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://yumomeow.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -101,4 +101,10 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/yumomeow/yumomeow.github.io.git
+  branch: master
+
+markdown:
+  plugins:
+    - "@traptitech/markdown-it-katex"
