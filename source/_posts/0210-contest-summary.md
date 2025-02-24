@@ -1,10 +1,8 @@
 ---
 title: 2.10 模拟赛总结
 date: 2025-02-10 21:06:00
+excerpt: wyq布置的乱七八糟的模拟赛题。。
 ---
-byd布置的乱七八糟的模拟赛题。。
-
-<!-- more -->
 
 ### [A - 洛谷P9981](https://www.luogu.com.cn/problem/P9981)
 
