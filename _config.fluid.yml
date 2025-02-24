@@ -775,7 +775,7 @@ post:
 # Based on GitHub Issues
 # See: https://utteranc.es
 utterances:
-  repo: YumoMeow/yumomeow.github.io
+  repo: YumoMeow/blog-comment
   issue_term: pathname
   label: Comment
   theme: github-light
