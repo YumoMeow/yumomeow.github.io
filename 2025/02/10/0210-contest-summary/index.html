@@ -27,8 +27,13 @@
 <meta property="og:description" content="wyq布置的乱七八糟的模拟赛题。。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-10T13:06:00.000Z">
-<meta property="article:modified_time" content="2025-02-24T09:39:57.960Z">
+<meta property="article:modified_time" content="2025-02-24T09:52:30.782Z">
 <meta property="article:author" content="雨沫">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="拓扑排序">
+<meta property="article:tag" content="哈希">
+<meta property="article:tag" content="KMP">
+<meta property="article:tag" content="堆">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -189,18 +194,6 @@
             </li>
           
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
-        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -253,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          835 字
+          832 字
         
       </span>
     
@@ -328,7 +321,7 @@
 <p>注意到对于矩阵的某一行或某一列，可以通过哈希使其变为一个数，通过使用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mi>M</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">KMP</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.13889em;">MP</span></span></span></span> 即可求出行或列的最小循环节长度，相乘即可。</p>
 <hr>
 <h3 id="C-洛谷P10195"><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10195">C - 洛谷P10195</a></h3>
-<p><strong>优先队列</strong></p>
+<p><strong>堆</strong></p>
 <h4 id="题意-3">题意</h4>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 个粒子排成一行，奇数位置的<strong>哞微子</strong>初始向右运动，偶数位置粒子<strong>反哞微子</strong>初始向左运动，每个粒子有初始位置 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 与初始速度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">s_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。当相邻两个粒子相撞时，两粒子同时湮灭。</p>
 <p>在这些粒子开始运动后，<strong>先</strong>等待 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 秒后观察，<strong>再</strong>等待 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span> 秒观察，以此类推。每次观察后所有粒子运动方向反转。对于每个粒子，求它在第几次观察时已经消失。</p>
@@ -344,6 +337,42 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%A8%A1%E6%8B%9F%E8%B5%9B%E6%80%BB%E7%BB%93/" class="category-chain-item">模拟赛总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="print-no-link">#动态规划</a>
+      
+        <a href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" class="print-no-link">#拓扑排序</a>
+      
+        <a href="/tags/%E5%93%88%E5%B8%8C/" class="print-no-link">#哈希</a>
+      
+        <a href="/tags/KMP/" class="print-no-link">#KMP</a>
+      
+        <a href="/tags/%E5%A0%86/" class="print-no-link">#堆</a>
+      
+    </div>
   
 </div>
 
