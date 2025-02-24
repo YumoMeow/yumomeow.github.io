@@ -508,7 +508,7 @@ while(ls[i].t>t){
 
 在 dfs 这棵树时，每次进入一个结点和回溯到这个结点时都记录一次，把所有的结点放到一个序列上，形成了欧拉序。例如：
 
-![](/source/img/DS-problem-list-summary/63138.jpg)
+![](/img/DS-problem-list-summary/63138.jpg)
 
 它的欧拉序就是 $(1,2,4,5,5,6,6,7,7,4,2,3,3)$。第 $i$ 个数第一次出现位置为 $st_i$，第二次为 $ed_i$。
 

@@ -1,10 +1,11 @@
 ---
-title: 2.10 模拟赛总结
+title: 2.10模拟赛总结
 date: 2025-02-10 21:06:00
 excerpt: wyq布置的乱七八糟的模拟赛题。。
 categories: 
     - 模拟赛总结
 tags: 
+    - 数据结构
     - 动态规划
     - 拓扑排序
     - 哈希
@@ -12,7 +13,7 @@ tags:
     - 堆
 ---
 
-### [A - 洛谷P9981](https://www.luogu.com.cn/problem/P9981)
+## [A. 洛谷P9981 - Minimum Longest Trip](https://www.luogu.com.cn/problem/P9981)
 
 **DP** **拓扑排序**
 
@@ -34,7 +35,7 @@ $$
 
 ---
 
-### [B - 洛谷P10475](https://www.luogu.com.cn/problem/P10475)
+## [B. 洛谷P10475 - Milking Grid](https://www.luogu.com.cn/problem/P10475)
 
 **哈希** **KMP**
 
@@ -48,7 +49,7 @@ $$
 
 ---
 
-### [C - 洛谷P10195](https://www.luogu.com.cn/problem/P10195)
+## [C. 洛谷P10195 - Quantum Moochanics](https://www.luogu.com.cn/problem/P10195)
 
 **堆**
 
