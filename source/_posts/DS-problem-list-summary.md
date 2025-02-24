@@ -33,6 +33,8 @@ tags:
 #### 题解
 显然询问可以离线，$k_i$ 逐渐下降的过程中相关的点也越来越多，转化为并查集加边过程，将询问按 $k_i$ 排序，每次连接权值为 $k_i$ 的所有边，答案即为 $v_i$ 所在联通块大小。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4185)**
+
 ## [2. 洛谷P1955 - 程序自动分析](https://www.luogu.com.cn/problem/P1955)
 
 **并查集**
@@ -42,6 +44,8 @@ tags:
 
 #### 题解
 注意到相等的限制维护了一些相等变量的集合，使用并查集，先合并相等的限制，对于不等的限制，若先前已经判定相等（在同一集合内），则不可能被满足。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1955)**
 
 ## [3. 洛谷P4479 - 第k大斜率](https://www.luogu.com.cn/problem/P4479)
 
@@ -61,6 +65,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 时间复杂度 $O(n \log^2 n)$。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4479)**
+
 ## [4. 洛谷P1966 - 火柴排队](https://www.luogu.com.cn/problem/P1966)
 
 **树状数组**
@@ -75,6 +81,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 假设 $a$ 数列不动，我们要动 $b$ 数列使它对齐。预处理出 $b$ 数列中每个数应该到达的位置数列 $l$，排序求逆序对即可。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1966)**
+
 ## [5. 洛谷P3605 - Promotion Counting](https://www.luogu.com.cn/problem/P3605)
 
 **树状数组**
@@ -84,6 +92,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 #### 题解
 我们可以对树进行 $dfs$。每次搜到一个点 $x$ 时，记录 $x$ 以前搜索到的点中 $p_i>p_x$ 的个数为 $cnt_1$。搜索完 $x$ 的子树后回溯时，记录满足条件的点数为 $cnt_2$。用 $cnt_2-cnt_1$ 即可。使用树状数组统计答案。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3605)**
 
 ## [6. 洛谷P1972 - HH的项链](https://www.luogu.com.cn/problem/P1972)
 
@@ -95,6 +105,7 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 #### 题解
 将询问离线后从右往左扫描数列，记录每个数当前最后一次出现的位置，在这个位置记录贡献。多次出现则删除之前的贡献。每次处理以当前点为左端点的区间，在右端点处求贡献的前缀和，即为区间答案。因为记录的是最后出现的位置，因此所有贡献一定被包含在了右端点左边。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1972)**
 
 ## [7. 洛谷P4113 - 采花](https://www.luogu.com.cn/problem/P4113)
 **树状数组**
@@ -102,6 +113,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 给定一个数列，每次询问区间 $[l,r]$ 中有多少出现两次及以上的数。
 #### 题解
 把询问离线后从左往右扫描，记录每个数上次和上上次出现的位置，在上上次出现的位置记录贡献。每次处理以当前点为右端点的区间，答案即为 $[l,r]$ 的贡献之和，使用树状数组维护贡献。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4113)**
 
 ## [8. 洛谷P3586 - LOG](https://www.luogu.com.cn/problem/P3586)
 **平衡树**
@@ -114,12 +127,16 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 考虑如何维护 $<s$ 的数的和 $sum$ 与 $\ge s$ 的数的个数 $x$，可以使用splay。将 $s$ 的前驱转到根，$sum$ 即为 $sum_{root}-sum_{rs_{root}}$，$x$ 即为 $siz_{rs_{root}}$。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3586)**
+
 ## [9. 洛谷P4588 - 数学计算](https://www.luogu.com.cn/problem/P4588)
 **线段树**
 #### 题意
 给定一个初始值为 $1$ 的数 $x$，每次操作将 $x$ 变为 $x\times m$ 或撤销之前的某一次操作。
 #### 题解
 最终的数可以写作 $m_1\times m_2\times m_3\times \cdots \times m_n$，因此我们可以建一棵线段树储存每个因数并记录区间乘积，即为答案。初始每个因数均为 $1$，操作1即为单点修改，撤销时把对应位置的值修改为 $1$ 即可。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4588)**
 
 ## [10. 洛谷P4198 - 楼房重建](https://www.luogu.com.cn/problem/P4198)
 **线段树**
@@ -134,12 +151,16 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 时间复杂度 $O(n \log^2 n)$。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4198)**
+
 ## [11. 洛谷P3870 - 开关](https://www.luogu.com.cn/problem/P3870)
 **线段树**
 #### 题意
 初始给定一个全 $0$ 序列，要求将区间内所有数取反和查询区间内 $1$ 的个数。
 #### 题解
 使用线段树维护，记录区间内 $1$ 的个数，每次对区间取反就是将 $sum$ 变为 $(r-l+1)-sum$。维护懒标记时也直接取反即可。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3870)**
 
 ## [12. 洛谷P5490 - 矩形面积并](https://www.luogu.com.cn/problem/P5490)
 **线段树 扫描线**
@@ -152,6 +173,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 
 实现细节中，注意线段树的每个叶子节点记录的是区间 $[l,r+1]$ 的信息，这样每个点保留的就是一条线段而不是一个端点了。因为我们将横坐标离散化了，因此一个结点的实际左右端点需要单独记录在结构体中。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P5490)**
+
 ## [13. 洛谷P1502 - 窗口的星星](https://www.luogu.com.cn/problem/P1502)
 **线段树 扫描线**
 #### 题意
@@ -160,6 +183,8 @@ $$y_j-mid\times x_j>y_i-mid\times x_i$$
 注意到如果以每个点为左下角建立一个 $H\times W$ 的矩形，如果两个点的矩形有交集就代表它们可以同时被选中，因为可以将矩形框在左下角的星星上，其他星星必定在交集的左下角，因此也可以被框住。
 
 考虑维护交集的权值和。建立完所有矩形后自下而上扫描线段，添加进线段树时将区间 $[x_l,x_r]$ 的点都增加矩形代表点的权值，扫描到出边删除即可，每次添加时更新区间最大值的最大值即为答案。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1502)**
 
 ## [14. 洛谷P4097 - Segment](https://www.luogu.com.cn/problem/P4097)
 **线段树 李超线段树**
@@ -201,7 +226,7 @@ pair<int,int> query(int u,int l,int r,int k){//返回的是编号和值，编号
 	return res;
 }
 ```
-
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4097)**
 
 ## [15. 洛谷P4556 - 雨天的尾巴](https://www.luogu.com.cn/problem/P4556)
 **线段树 线段树合并**
@@ -229,6 +254,8 @@ void merge(int p1,int p2,int l,int r){
 
 深搜整棵树，回溯过程中依次将当前点的所有儿子合并到当前点的权值线段树上，然后执行当前点的加减操作，执行完毕后记录当前点的答案即可。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4556)**
+
 ## [16. 洛谷P3919 - 可持久化线段树1](https://www.luogu.com.cn/problem/P3919)
 **线段树 主席树**
 #### 题意
@@ -253,6 +280,7 @@ void change(int &u,int l,int r,int U,int k){
 	return;
 }
 ```
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3919)**
 
 ## [17. 洛谷P3402 - 可持久化并查集](https://www.luogu.com.cn/problem/P3402)
 **线段树 主席树**
@@ -265,6 +293,7 @@ void change(int &u,int l,int r,int U,int k){
 
 注意，$fa$ 和 $size$ 并不能在一棵主席树上记录，因为每次合并更改旧根的 $fa$ 和新根的 $size$。所以需要开两个。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3402)**
 
 ## [18. 洛谷P3834 - 可持久化线段树2](https://www.luogu.com.cn/problem/P3834)
 **线段树 主席树**
@@ -288,6 +317,7 @@ int query(int u,int v,int l,int r,int k){
 	else return query(tr[u].rs,tr[v].rs,mid+1,r,k-s);
 }
 ```
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3834)**
 
 ## [19. 洛谷P2633 - Count on a tree](https://www.luogu.com.cn/problem/P2633)
 **线段树 主席树**
@@ -298,12 +328,16 @@ int query(int u,int v,int l,int r,int k){
 
 仍然使用主席树，从根节点开始搜索，每个点在它父亲点的基础上增加它的信息。这样我们就可以快速查询。设点 $i$ 对应的前缀权值线段树为 $c_i$，则 $u,v$ 路径上的权值线段树即为 $c_u+c_v-c_{lca(u,v)}-c_{fa_{lca(u,v)}}$。在它上面查询即可。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P2633)**
+
 ## [20. 洛谷P3302 - 森林](https://www.luogu.com.cn/problem/P3302)
 **线段树 主席树**
 #### 题意
 给定一片森林，要求支持查询两点路径上第 $k$ 小权值以及在两点之间连边，保证连边后仍是森林。
 #### 题解
 这题和上一题的区别在于增加了连边（合并两棵树）的操作。如果要用主席树维护 $k$ 小权值，合并就必须要暴力合并。每次合并在两点间连一条边，并将小树的根节点的父亲设置为大树的根节点。此时小树上主席树应该发生变化，我们直接从小树的根开始暴力dfs重构即可。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3302)**
 
 ## [21. 洛谷P4585 - 火星商店问题](https://www.luogu.com.cn/problem/P4585)
 **Trie树 主席树**
@@ -372,6 +406,7 @@ void check(int &u,int d){
     }
 }
 ```
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4148)**
 
 ## [23. 洛谷P3710 - 方方方的数据结构](https://www.luogu.com.cn/problem/P3710)
 **平衡树 K-D树**
@@ -385,6 +420,8 @@ void check(int &u,int d){
 每个询问可能会被撤销，所以它的影响范围仅限于某个区间上的某个时间段，放到平面内就是一个矩形。
 
 离线所有问到的点，放到平面上以后对平面建立K-D树，每次修改时就可以直接在某个大的矩形上打标记，按照时间处理操作和询问，询问时递归直到找到具体的点即可，在递归的途中将大矩形的标记pushdown。由于我们是离线所有询问后先建的树，后面处理修改时并没有对点的插入，因此平衡性不会破坏，并不需要重建操作。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3710)**
 
 ## [24. 洛谷P2801 - 教主的魔法](https://www.luogu.com.cn/problem/P2801)
 **分块**
@@ -403,12 +440,16 @@ $k$ 是变化的，所以不能使用线段树之类的数据结构维护。这�
 
 查询时同样，对于前后未被覆盖的块暴力遍历统计，对于被完全覆盖的块，排序后在内部二分即可。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P2801)**
+
 ## [25. 洛谷P3203 - 弹飞绵羊](https://www.luogu.com.cn/problem/P3203)
 **分块**
 #### 题解
 使用分块，对每个点维护跳出该块需要的次数以及跳出该块后到达的点。这个可以 $O(n)$ 预处理。修改时直接将块内所有点暴力重构一遍即可。
 
 询问时一块一块跳，每次累加答案直到跳出去。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3203)**
 
 ## [26. 洛谷P3863 - 序列](https://www.luogu.com.cn/problem/P3863)
 **分块**
@@ -422,6 +463,8 @@ $k$ 是变化的，所以不能使用线段树之类的数据结构维护。这�
 考虑如何处理修改。如果对每个数都重新建块并依次更新每一个操作，时间复杂度显然不支持。注意到我们是从左到右依次处理每个数，这样区间修改就可以用类似差分的方式实现。
 
 具体地，我们并不需要在每个位置重新初始化，只需要在查询下一个数时加上两个数的差即可，这样上一个数的修改就可以保留到下一个数而不是重新修改一次。所以只需要在修改区间的开头加上这个数，之后每个位置都继承上一个位置的修改，在区间末尾再减去这个数即可。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3863)**
 
 ## [27. 洛谷P1975 - 排队](https://www.luogu.com.cn/problem/P1975)
 **分块**
@@ -441,6 +484,8 @@ $k$ 是变化的，所以不能使用线段树之类的数据结构维护。这�
 - $a_x<a_j,ans++$
 
 考虑如何快速统计区间内的答案，使用分块。对于整块的统计，排序后直接二分即可。分散的就暴力遍历求解。时间复杂度 $O(n \sqrt n)$。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1975)**
 
 ## [28. 洛谷P1903 - 数颜色 / 维护队列](https://www.luogu.com.cn/problem/P1903)
 **分块 莫队**
@@ -464,6 +509,8 @@ while(ls[i].t>t){
 ```
 时间复杂度 $O(n^{\frac{5}{3}})$。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1903)**
+
 ## [29. 洛谷P1494 - 小Z的袜子](https://www.luogu.com.cn/problem/P1494)
 **分块 莫队**
 #### 题意
@@ -473,12 +520,16 @@ while(ls[i].t>t){
 
 使用莫队处理即可。假设我们已经处理好区间 $[l,r]$，下一步求区间 $[l,r+1]$，加入了位置 $r+1$ 的数，设它为 $x$，那么答案应该加上 $(cnt_x+1)*cnt_x-cnt_x*(cnt_x-1)$，之后更新 $cnt_x$，删除同理。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1494)**
+
 ## [30. 洛谷P2709 - 小B的询问](https://www.luogu.com.cn/problem/P2709)
 **分块 莫队**
 #### 题意
 给定一个数列，值域为 $[1,k](k\le 5\times 10^4)$，每次给定区间 $[l,r]$，求 $\sum_{i=1}^k cnt_i^2$。$cnt_i$ 表示数字 $i$ 在区间内的出现次数。
 #### 题解
 与上一题十分类似，扩展区间时直接减去 $cnt_i^2$，加上 $(cnt_i+1)^2$，更新 $cnt_i$ 即可。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P2709)**
 
 ## [31. 洛谷P3674 - 小清新人渣的本愿](https://www.luogu.com.cn/problem/P3674)
 **分块 莫队 bitset**
@@ -493,12 +544,16 @@ while(ls[i].t>t){
 
 对于乘法，我们直接枚举积的约数。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3674)**
+
 ## [32. 洛谷P3709 - 大爷的字符串题](https://www.luogu.com.cn/problem/P3709)
 **分块 莫队**
 #### 题解
 要从区间中每次取一个严格上升序列，问最少取几次，显然仅与出现次数最多的数有关，因为要把它一个一个取走。于是问题转化为求区间众数。
 
 用莫队维护，维护两个数组，$cnta$ 表示区间内数的桶，$cntb$ 表示 $cnta$ 的桶。每次往区间里加入一个数，如果加完还是小于当前 $ans$ 不用管，否则更新 $ans$。从区间中删除一个数时，如果当前数是众数才有影响，但如果众数不止一个，删掉之后还有其他的众数，不需要更新。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3709)**
 
 ## [33. SP10707 - Count on a tree II](https://www.spoj.com/problems/COT2/)
 #### 题意
@@ -520,6 +575,8 @@ while(ls[i].t>t){
 
 在欧拉序上跑莫队即可处理所有询问区间。
 
+**[标程](https://yumomeow.github.io/2025/02/24/std/#SP10707)**
+
 ## [34. 洛谷P4074 - 糖果公园](https://www.luogu.com.cn/problem/P4074)
 **莫队 树上莫队**
 #### 题解
@@ -531,6 +588,7 @@ void update(int x){
     else sum-=w[cnt[c[x]]--]*v[c[x]];
 }
 ```
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4074)**
 
 ## [35. 洛谷P3396 - 哈希冲突](https://www.luogu.com.cn/problem/P3396)
 **根号分治**
@@ -544,3 +602,5 @@ void update(int x){
 对于 $> \sqrt n$ 的 $p$，因为对答案有贡献的值的数量一定 $\le \frac{n}{p}$ 也就是 $\sqrt n$，每次我们只需要暴力遍历序列即可，时间复杂度也是 $O(\sqrt n)$。
 
 这种处理方式就是根号分治。
+
+**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3396)**
