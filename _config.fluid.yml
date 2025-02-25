@@ -235,12 +235,14 @@ font:
 # Specify the path of your custom js file, support list. The path is relative to the source directory, such as `/js/custom.js` corresponding to the directory `source/js/custom.js`
 custom_js:
   - /js/title.js
+  - /js/color.js
 
 # 指定自定义 .css 文件路径，用法和 custom_js 相同
 # The usage is the same as custom_js
 custom_css:
  - https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css
  - /css/cloudedGlass.css
+ - /css/color.css
 # 网页访问统计
 # Analysis of website visitors
 web_analytics:
@@ -448,17 +450,17 @@ footer:
   # 页脚第一行文字的 HTML，建议保留 Fluid 的链接，用于向更多人推广本主题
   # HTML of the first line of the footer, it is recommended to keep the Fluid link to promote this theme to more people
   content: '
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener" style="color: white"><span>Hexo</span></a>
+    <i class="iconfont icon-love" style="color: white"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener" style="color: white"><span>Fluid</span></a>
     <!-- 博客上线天数 -->
     <div>
-      <span id="timeDate">载入天数...</span>
-      <span id="times">载入时分秒...</span>
+      <span id="timeDate" style="color: white">载入天数...</span>
+      <span id="times" style="color: white">载入时分秒...</span>
       <script src="/js/duration.js"></script>
     </div>
-    <a href="https://icp.gov.moe/?keyword=20251185" target="_blank">萌ICP备20251185号</a>
-  '
+    <a href="https://icp.gov.moe/?keyword=20251185" target="_blank" style="color: white">萌ICP备20251185号</a>
+'
 
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
