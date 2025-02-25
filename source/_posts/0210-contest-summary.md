@@ -1,7 +1,7 @@
 ---
 title: 2.10模拟赛总结
 date: 2025-02-10 21:06:00
-excerpt: wyq布置的乱七八糟的模拟赛题。。
+excerpt: wyq布置的模拟赛题。。
 categories: 
     - 模拟赛总结
 tags: 

@@ -1,7 +1,7 @@
 ---
 title: 数据结构题单总结
 date: 2025-02-21 14:42:00
-excerpt: wyq布置的乱七八糟的数据结构题。。
+excerpt: wyq布置的数据结构题。。
 categories: 
 	- 题单总结
 tags:
