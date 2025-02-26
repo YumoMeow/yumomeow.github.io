@@ -1,5 +1,5 @@
 ---
-title: 题解：JOISC2021 C - フードコート
+title: 题解：JOISC2021C - フードコート
 date: 2025-02-25 19:47:00
 excerpt: 换维扫描线 线段树
 categories: 
