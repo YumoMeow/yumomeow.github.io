@@ -22,6 +22,7 @@ tags:
 给定一个数列，求任意选出四个数异或和为 $0$ 的方案数。
 #### 题解
 把四个数分成两组，每组中两个数异或起来答案一定是一样的。枚举 $i,j$，能与它组成答案的一共有 $cnt_{a_i\oplus a_j}$ 个。为避免重复计算，先枚举 $i$ 后面能与它组答案的数 $j$，计算完再将 $i$ 前面能与它组答案的数加到 $cnt$ 里。
+
 #### 代码
 ```cpp
 #include<iostream>
@@ -31,8 +32,6 @@ int n,a[5010],ans,b[2000010];
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("xor.in","r",stdin);
-	freopen("xor.out","w",stdout);
 	cin>>n;
 	for(int i=1;i<=n;i++) cin>>a[i];
 	for(int i=1;i<=n;i++){
@@ -90,8 +89,6 @@ priority_queue<Node> q;
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("trip.in","r",stdin);
-	freopen("trip.out","w",stdout);
 	cin>>n>>m>>s>>t;
 	for(int i=1,a,b,d;i<=m;i++){
 		char ch;
@@ -168,8 +165,6 @@ int op,a,b,c,d,e;
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("chess.in","r",stdin);
-	freopen("chess.out","w",stdout);
 	cin>>m;
 	while(m--){
 		cin>>op>>a>>b>>c>>d>>e;
@@ -282,8 +277,6 @@ int lca(int u,int v){
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("distance.in","r",stdin);
-	freopen("distance.out","w",stdout);
 	lg[0]=-1;
 	cin>>n;
 	for(int i=1;i<n;i++){
