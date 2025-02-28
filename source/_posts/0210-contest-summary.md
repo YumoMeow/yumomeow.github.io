@@ -13,7 +13,7 @@ tags:
     - 堆
 ---
 
-## [A. 洛谷P9981 - Minimum Longest Trip](https://www.luogu.com.cn/problem/P9981)
+## [A. LuoguP9981 - Minimum Longest Trip](https://www.luogu.com.cn/problem/P9981)
 
 **DP** **拓扑排序**
 
@@ -33,9 +33,9 @@ $$
 
 对于第二问，同样使用dp思想。设以点 $x$ 为起点最长路径长度为 $f_x$，在求出 $f_x=k$ 的点的答案后，可以通过选择出边 $(u,v)$ 中 $u$ 最小且 $v$ 尽量排名靠前的，以此推出所有 $f_x=k+1$ 的点的答案。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P9981)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP9981)**
 
-## [B. 洛谷P10475 - Milking Grid](https://www.luogu.com.cn/problem/P10475)
+## [B. LuoguP10475 - Milking Grid](https://www.luogu.com.cn/problem/P10475)
 
 **哈希** **KMP**
 
@@ -43,13 +43,13 @@ $$
 给定一个由大写字母组成的矩阵，求最小的可以重复铺设形成原矩阵的单元大小。
 
 #### 题解
-本题与[洛谷P4391](https://www.luogu.com.cn/problem/P4391)十分类似，可以看作该问题的二维版，对于每一维分开来求。
+本题与[LuoguP4391](https://www.luogu.com.cn/problem/P4391)十分类似，可以看作该问题的二维版，对于每一维分开来求。
 
 注意到对于矩阵的某一行或某一列，可以通过哈希使其变为一个数，通过使用 $KMP$ 即可求出行或列的最小循环节长度，相乘即可。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P10475)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP10475)**
 
-## [C. 洛谷P10195 - Quantum Moochanics](https://www.luogu.com.cn/problem/P10195)
+## [C. LuoguP10195 - Quantum Moochanics](https://www.luogu.com.cn/problem/P10195)
 
 **堆**
 
@@ -65,4 +65,4 @@ $n$ 个粒子排成一行，奇数位置的**哞微子**初始向右运动，偶
 
 当哞微子在反哞微子左侧时，只有可能在奇数时间湮灭。其相遇时间 $i$ 即为满足 $i*(s_l+s_r) \ge dis_{l,r}$ 的最小正整数，解得 $i=\lceil\frac{dis_{l,r}}{s_l+s_r}\rceil$。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P10195)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP10195)**

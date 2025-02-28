@@ -3,7 +3,7 @@ title: 标程
 date: 2025-02-24 20:20:00
 hide: true
 ---
-## 洛谷P1637
+## LuoguP1637
 ```cpp
 #include<iostream>
 #define int long long
@@ -34,7 +34,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P7706
+## LuoguP7706
 ```cpp
 #include<iostream>
 #define int long long
@@ -102,7 +102,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P4146
+## LuoguP4146
 ```cpp
 #include<iostream>
 #define fa(x) tr[x].f
@@ -208,7 +208,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3793
+## LuoguP3793
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -285,7 +285,7 @@ signed main(){
 }
 ```
 
-## 洛谷P9981
+## LuoguP9981
 ```cpp
 #include<iostream>
 #include<queue>
@@ -368,7 +368,7 @@ signed main(){
 }
 ```
 
-## 洛谷P10475
+## LuoguP10475
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -411,7 +411,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P10195
+## LuoguP10195
 ```cpp
 #include <bits/stdc++.h>
 #define int long long
@@ -459,7 +459,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P4185
+## LuoguP4185
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -514,7 +514,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P1955
+## LuoguP1955
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -564,7 +564,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P4479
+## LuoguP4479
 ```cpp
 #include<algorithm>
 #include<iostream>
@@ -620,7 +620,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P1966
+## LuoguP1966
 ```cpp
 #include<bits/stdc++.h>
 #define int long long
@@ -656,7 +656,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3605
+## LuoguP3605
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -702,7 +702,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P1972
+## LuoguP1972
 ```cpp
 #include<iostream>
 #include<vector>
@@ -741,7 +741,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P4113
+## LuoguP4113
 ```cpp
 #include<iostream>
 #include<vector>
@@ -797,7 +797,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3586
+## LuoguP3586
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -887,7 +887,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P4588
+## LuoguP4588
 ```cpp
 #include<iostream>
 #define int long long
@@ -944,7 +944,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P4198
+## LuoguP4198
 ```cpp
 #include<bits/stdc++.h>
 #define ls (u<<1)
@@ -993,7 +993,7 @@ int main(){
 	return 0;
 }
 ```
-## 洛谷P3870
+## LuoguP3870
 ```cpp
 #include<iostream>
 #define int long long
@@ -1045,7 +1045,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P5490
+## LuoguP5490
 ```cpp
 #include<iostream>
 #include<algorithm>
@@ -1103,7 +1103,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P1502
+## LuoguP1502
 ```cpp
 #include<iostream>
 #include<algorithm>
@@ -1188,7 +1188,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P4097
+## LuoguP4097
 ```cpp
 #include<iostream>
 #define int long long
@@ -1270,7 +1270,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P4556
+## LuoguP4556
 ```cpp
 #include<iostream>
 #include<vector>
@@ -1365,7 +1365,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3919
+## LuoguP3919
 ```cpp
 #include<iostream>
 #define int long long
@@ -1422,7 +1422,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3402
+## LuoguP3402
 ```cpp
 #include<iostream>
 #define mid ((l+r)>>1)
@@ -1505,7 +1505,7 @@ int main(){
 	return 0;
 }
 ```
-## 洛谷P3834
+## LuoguP3834
 ```cpp
 #include<iostream>
 #include<algorithm>
@@ -1570,7 +1570,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P2633
+## LuoguP2633
 ```cpp
 #include<iostream>
 #include<vector>
@@ -1662,7 +1662,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3302
+## LuoguP3302
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -1772,7 +1772,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P4148
+## LuoguP4148
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -1875,7 +1875,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P3710
+## LuoguP3710
 ```cpp
 #include<ctime>
 #include<iostream>
@@ -2007,7 +2007,7 @@ signed main(){
     return 0;
 }
 ```
-## 洛谷P2801
+## LuoguP2801
 ```cpp
 #include<iostream>
 #include<cmath>
@@ -2074,7 +2074,7 @@ signed main(){
 	return 0;
 }
 ```
-## 洛谷P3203
+## LuoguP3203
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -2124,7 +2124,7 @@ int main(){
     }
 }
 ```
-## 洛谷P3863
+## LuoguP3863
 ```cpp
 #include<ctime>
 #include<iostream>

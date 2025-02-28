@@ -14,7 +14,7 @@ tags:
 ---
 数据结构题。。
 
-## [A. 洛谷P1637 - 三元上升子序列](https://www.luogu.com.cn/problem/P1637)
+## [A. LuoguP1637 - 三元上升子序列](https://www.luogu.com.cn/problem/P1637)
 **树状数组**
 #### 题意
 给定一个数列，求满足 $i<j<k$ 且 $a_i<a_j<a_k$ 的 $i,j,k$ 个数。
@@ -25,9 +25,9 @@ tags:
 
 同样的，和它组三元组的 $k$ 必须满足 $j<k$ 且 $a_j<a_k$，即在它后面且比它大的数。我们从后往前扫一遍，每次插入 $a_j$ 并求 $>a_j$ 的后缀和即可。因为 $i$ 和 $k$ 可以两两配对，所以位置 $j$ 的贡献就是两次查询的前缀和相乘。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P1637)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP1637)**
 
-## [B. 洛谷P7706 - 文文的摄影布置](https://www.luogu.com.cn/problem/P7706)
+## [B. LuoguP7706 - 文文的摄影布置](https://www.luogu.com.cn/problem/P7706)
 **线段树**
 #### 题意
 给定一个数列，每个数有两个属性$A_i$ 与 $B_i$，在其中选一个长度为 $3$ 的子序列，分别为 $i,j,k$。
@@ -56,14 +56,14 @@ $maxA$ 可以直接维护，考虑如何维护 $A_k-B_j$ 与 $A_i-B_j$，分别�
 
 综上，线段树的一个结点所维护的信息有 $max\psi,maxA,minB,maxP,maxQ$，转移即可。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P7706)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP7706)**
 
-## [C. 洛谷P4146 - 序列终结者](https://www.luogu.com.cn/problem/P4146)
+## [C. LuoguP4146 - 序列终结者](https://www.luogu.com.cn/problem/P4146)
 **平衡树**
 #### 题意
 给定一个序列，要求支持区间加，区间反转以及查询区间最大值。
 #### 题解
-区间反转的模板题是[洛谷P3391](https://www.luogu.com.cn/problem/P3391)。区间反转操作适合用平衡树维护，这里讲 Splay 树做法（Treap不会）。
+区间反转的模板题是[LuoguP3391](https://www.luogu.com.cn/problem/P3391)。区间反转操作适合用平衡树维护，这里讲 Splay 树做法（Treap不会）。
 
 与普通平衡树不同的是，它维护的不再是值之间的大小关系，而是下标之间的大小关系。每个结点对应一个下标，储存下标的值，左子树内结点的下标小于它，右子树内结点的下标大于它。
 
@@ -126,9 +126,9 @@ int build(int l,int r,int f){
 	return mid;
 }
 ```
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P4146)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP4146)**
 
-## [D. 洛谷P3793 - 由乃救爷爷](https://www.luogu.com.cn/problem/P3793)
+## [D. LuoguP3793 - 由乃救爷爷](https://www.luogu.com.cn/problem/P3793)
 **ST表 分块**
 #### 题意
 给定一个数列，每次询问区间最大值。数列长度与询问数量最大均为 $2e7$，数据完全随机。
@@ -137,4 +137,4 @@ int build(int l,int r,int f){
 
 考虑到数列很长且区间随机，每次查询必定会覆盖很长的一段。我们可以分块处理，$O(n)$ 预处理出每一块内的最大值并对它建立 ST 表，这样空间复杂度就被压缩到了 $O(\sqrt n\log \sqrt n)$，快速查询整块内的最大值，对于前后的零散数据，分别处理出前缀和与后缀和，取 max。这样，跨越多个块的 $l,r$ 查询复杂度就可以做到 $O(1)$。但是对于同一块内的区间，无法做到 $O(1)$ 查询，只能暴力遍历，每次复杂度 $O(\sqrt n)$。但由于数据随机，属于同一块的区间必定很少，所以能过。
 
-**[标程](https://yumomeow.github.io/2025/02/24/std/#洛谷P3793)**
+**[标程](https://yumomeow.github.io/2025/02/24/std/#LuoguP3793)**
