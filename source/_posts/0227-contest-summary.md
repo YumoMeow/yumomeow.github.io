@@ -22,6 +22,7 @@ tags:
 给定一个数列，求任意选出四个数异或和为 $0$ 的方案数。
 #### 题解
 把四个数分成两组，每组中两个数异或起来答案一定是一样的。枚举 $i,j$，能与它组成答案的一共有 $cnt_{a_i\oplus a_j}$ 个。为避免重复计算，先枚举 $i$ 后面能与它组答案的数 $j$，计算完再将 $i$ 前面能与它组答案的数加到 $cnt$ 里。
+
 #### 代码
 ```cpp
 #include<iostream>
@@ -31,8 +32,6 @@ int n,a[5010],ans,b[2000010];
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("xor.in","r",stdin);
-	freopen("xor.out","w",stdout);
 	cin>>n;
 	for(int i=1;i<=n;i++) cin>>a[i];
 	for(int i=1;i<=n;i++){
@@ -90,8 +89,6 @@ priority_queue<Node> q;
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("trip.in","r",stdin);
-	freopen("trip.out","w",stdout);
 	cin>>n>>m>>s>>t;
 	for(int i=1,a,b,d;i<=m;i++){
 		char ch;
@@ -155,7 +152,7 @@ $$
 
 至少前 60 分的 dp 有充足时间的话能考虑出来，但是赛时直接没看这个题。
 #### 代码
-80分。
+80 分。
 ```cpp
 #include<iostream>
 #define int long long
@@ -168,8 +165,8 @@ int op,a,b,c,d,e;
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("chess.in","r",stdin);
-	freopen("chess.out","w",stdout);
+    freopen("chess.in","r",stdin);
+    freopen("chess.out","w",stdout);
 	cin>>m;
 	while(m--){
 		cin>>op>>a>>b>>c>>d>>e;
@@ -180,6 +177,7 @@ signed main(){
 				a=a*a%MOD;
 				b>>=1;
 			}
+			cout<<ans<<'\n';
 			continue;
 		}
 		f[c][d][0]=1;
@@ -188,7 +186,7 @@ signed main(){
 			for(int j=1;j<=a;j++){
 				for(int k=1;k<=b;k++){
 					if(op==0){//车
-						f[j][k][i]=(h[j][i-1]+w[k][i-1]-2*f[j][k][i-1]+MOD)%MOD;
+						f[j][k][i]=(h[j][i-1]+w[k][i-1]%MOD-2*f[j][k][i-1]%MOD+MOD)%MOD;
 						h[j][i]+=f[j][k][i],w[k][i]+=f[j][k][i];
 						h[j][i]%=MOD,w[k][i]%=MOD;						
 					}
@@ -221,6 +219,7 @@ signed main(){
 			for(int j=1;j<=b;j++){
 				for(int k=0;k<=e;k++){
 					f[i][j][k]=0;
+					h[i][k]=0,w[j][k]=0;
 				}
 			}
 		}
@@ -243,6 +242,7 @@ $$
 考虑一个 $O(n^2\log n)$ 的做法，在上一个做法中我们对每个点都枚举了子树内的两个点。可以反过来思考每两个点对哪些结点有贡献。产生贡献的充要条件是它俩在同一个子树内。显然只要是以 $lca$ 及以上的结点为根的子树都可以同时被包含，我们只需要在 $lca$ 处记录贡献，再从叶子向上合并就行。可以拿 70 分。
 
 #### 代码
+70 分。
 ```cpp
 #include<iostream>
 #include<cmath>
@@ -282,8 +282,6 @@ int lca(int u,int v){
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);cout.tie(0);
-	freopen("distance.in","r",stdin);
-	freopen("distance.out","w",stdout);
 	lg[0]=-1;
 	cin>>n;
 	for(int i=1;i<n;i++){
