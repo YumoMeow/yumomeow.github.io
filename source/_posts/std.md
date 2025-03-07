@@ -3,6 +3,242 @@ title: 标程
 date: 2025-02-24 20:20:00
 hide: true
 ---
+## 0227A
+```cpp
+#include<iostream>
+#define int long long
+using namespace std;
+int n,a[5010],ans,b[2000010];
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	cin>>n;
+	for(int i=1;i<=n;i++) cin>>a[i];
+	for(int i=1;i<=n;i++){
+		for(int j=i+1;j<=n;j++){
+			ans+=b[a[i]^a[j]];//先算后面的
+		}
+		for(int j=1;j<i;j++) b[a[i]^a[j]]++;//再加前面的
+	}
+	cout<<ans;
+	return 0;
+}
+```
+## 0227B
+```cpp
+#include<iostream>
+#include<cmath>
+#include<queue>
+#include<cstring>
+#define int long long
+#define pii pair<int,int>
+using namespace std;
+const int N=5e6+10;
+int n,m,s,t,tot,p,head[N],dis[N];
+bool vis[N];
+int hsh(pii a){return a.first+a.second*n;}//映射
+struct Edge{pii to;int w,nxt;bool fl;}e[N];
+void addedge(pii u,pii v,int w,bool fl){
+	e[++tot].nxt=head[hsh(u)];
+	e[tot].to=v;
+	e[tot].w=w;e[tot].fl=fl;
+	head[hsh(u)]=tot;
+}
+struct Node{
+	pii u;int dis;
+	bool operator < (const Node &t) const{
+		return dis>t.dis;
+	}
+};
+priority_queue<Node> q;
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	cin>>n>>m>>s>>t;
+	for(int i=1,a,b,d;i<=m;i++){
+		char ch;
+		cin>>a>>b>>d>>ch;
+		addedge({a,0},{b,0},d,ch=='G'?1:0);
+	}
+	for(int i=1;i<=20;i++){
+		for(int j=1;j<=n;j++){
+			for(int k=head[hsh({j,0})];k;k=e[k].nxt){
+				if(e[k].fl) addedge({j,i},{e[k].to.first,i},(int)ceil(1.0*e[k].w/pow(2,i)),1);//平整
+				else addedge({j,i},{e[k].to.first,0},(int)ceil(1.0*e[k].w/pow(2,i)),1);//坑
+			}
+		}
+	}
+	cin>>p;
+	for(int i=1,x,c;i<=p;i++){
+		cin>>x>>c;
+		for(int j=1;j<=20;j++) addedge({x,j-1},{x,j},c,1);//修理站建边
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=0;j<=20;j++) dis[hsh({i,j})]=0x3f3f3f3f;
+	}
+	dis[hsh({s,0})]=0;
+	q.push({{s,0},0});
+	while(q.size()){
+		int u=hsh(q.top().u);
+		q.pop();
+		if(vis[u]) continue;
+		vis[u]=1;
+		for(int i=head[u];i;i=e[i].nxt){
+			pii v=e[i].to;
+			if(dis[hsh(v)]>dis[u]+e[i].w){
+				dis[hsh(v)]=dis[u]+e[i].w;
+				if(!vis[hsh(v)]){
+					q.push({v,dis[hsh(v)]});
+				}
+			}
+		}
+	}	
+	int ans=0x3f3f3f3f;
+	for(int i=0;i<=20;i++) ans=min(ans,dis[hsh({t,i})]);
+	if(ans==0x3f3f3f3f) cout<<"-1";
+	else cout<<ans;
+	return 0;
+}
+```
+## 0227C
+```cpp
+#include<iostream>
+#define int long long
+using namespace std;
+const int MOD=19260817;
+int m,f[110][110][10010],h[110][10010],w[110][10010];
+int dx[]={2,2,1,1,-1,-1,-2,-2},dy[]={1,-1,2,-2,2,-2,1,-1};
+int tx[]={2,2,-2,-2},ty[]={2,-2,2,-2};
+int op,a,b,c,d,e;
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+    freopen("chess.in","r",stdin);
+    freopen("chess.out","w",stdout);
+	cin>>m;
+	while(m--){
+		cin>>op>>a>>b>>c>>d>>e;
+		if(e>10000){//只有车
+			a=a+b-2;b=e;int ans=1;
+			while(b){
+				if(b&1) ans=ans*a%MOD;
+				a=a*a%MOD;
+				b>>=1;
+			}
+			cout<<ans<<'\n';
+			continue;
+		}
+		f[c][d][0]=1;
+		h[c][0]++,w[d][0]++;
+		for(int i=1;i<=e;i++){
+			for(int j=1;j<=a;j++){
+				for(int k=1;k<=b;k++){
+					if(op==0){//车
+						f[j][k][i]=(h[j][i-1]+w[k][i-1]%MOD-2*f[j][k][i-1]%MOD+MOD)%MOD;
+						h[j][i]+=f[j][k][i],w[k][i]+=f[j][k][i];
+						h[j][i]%=MOD,w[k][i]%=MOD;						
+					}
+					else if(op==1){//马
+						for(int l=0;l<8;l++){
+							if(j+dx[l]<=0||j+dx[l]>a||k+dy[l]<=0||k+dy[l]>b) continue;
+							f[j][k][i]+=f[j+dx[l]][k+dy[l]][i-1];
+							f[j][k][i]%=MOD;
+						}						
+					}
+					else{//象
+						for(int l=0;l<4;l++){
+							if(j+tx[l]<=0||j+tx[l]>a||k+ty[l]<=0||k+ty[l]>b) continue;
+							f[j][k][i]+=f[j+tx[l]][k+ty[l]][i-1];
+							f[j][k][i]%=MOD;
+						}
+					}
+				}
+			}
+		}
+		int ans=0;
+		for(int i=1;i<=a;i++){
+			for(int j=1;j<=b;j++){
+				ans+=f[i][j][e];
+				ans%=MOD;
+			}
+		}
+		cout<<ans<<'\n';		
+		for(int i=1;i<=a;i++){
+			for(int j=1;j<=b;j++){
+				for(int k=0;k<=e;k++){
+					f[i][j][k]=0;
+					h[i][k]=0,w[j][k]=0;
+				}
+			}
+		}
+	}
+	return 0;
+}
+```
+## 0227D
+```cpp
+#include<iostream>
+#include<cmath>
+#define int long long
+using namespace std;
+const int N=2e5+10,MOD=1e9+7;
+int n,head[N],tot,ans[N],a[N],b[N],fa[N][20],lg[N],dep[N];
+struct Edge{int to,nxt;}e[N];
+void addedge(int u,int v){
+	e[++tot].nxt=head[u];
+	e[tot].to=v;
+	head[u]=tot;
+}
+void dfs(int u){
+	dep[u]=dep[fa[u][0]]+1;
+	for(int i=1;i<=lg[dep[u]];i++){
+		fa[u][i]=fa[fa[u][i-1]][i-1];
+	}//预处理，lca要用
+	for(int i=head[u];i;i=e[i].nxt){
+		if(e[i].to!=fa[u][0]){
+			fa[e[i].to][0]=u;
+			dfs(e[i].to);
+			ans[u]+=ans[e[i].to];//求答案
+			ans[u]%=MOD;
+		}
+	}
+}
+int lca(int u,int v){
+	if(dep[u]<dep[v]) swap(u,v);
+	while(dep[u]>dep[v]) u=fa[u][lg[dep[u]-dep[v]]];
+	if(u==v) return u;
+	for(int i=lg[dep[u]];i>=0;i--){
+		if(fa[u][i]!=fa[v][i]) u=fa[u][i],v=fa[v][i];
+	}
+	return fa[u][0];
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	lg[0]=-1;
+	cin>>n;
+	for(int i=1;i<n;i++){
+		int u,v;
+		cin>>u>>v;
+		addedge(u,v);
+		addedge(v,u);
+	}
+	for(int i=1;i<=n;i++){
+		lg[i]=lg[i>>1]+1;
+		cin>>a[i]>>b[i];
+	}
+	dfs(1);
+	for(int i=1;i<=n;i++){
+		for(int j=i+1;j<=n;j++){
+			ans[lca(i,j)]+=2*min(abs(a[i]-a[j]),abs(b[i]-b[j]));
+			ans[lca(i,j)]%=MOD;//对每个点对，在lca加上贡献。乘二是因为 (x,y) 与 (y,x) 各算一次贡献。
+		}
+	}
+	dfs(1);
+	for(int i=1;i<=n;i++) cout<<ans[i]<<'\n';
+	return 0;
+}
+```
 ## LuoguP1637
 ```cpp
 #include<iostream>
@@ -2217,5 +2453,216 @@ signed main(){
     for(int i=1;i<=cnt2;i++) cout<<ans[i]<<'\n';
     cerr<<"\nTime: "<<clock()-START<<"ms"<<endl;    
     return 0;
+}
+```
+## CF1179C
+```cpp
+#include<iostream>
+#define ls (u<<1)
+#define rs (u<<1|1)
+#define mid ((l+r)>>1)
+#define int long long
+using namespace std;
+const int N=1e6+10;
+int n,m,a[N],b[N],q,mi[N<<2],tag[N<<2];
+void pushdown(int u){
+	mi[ls]+=tag[u];mi[rs]+=tag[u];
+	tag[ls]+=tag[u];tag[rs]+=tag[u];
+	tag[u]=0;
+}
+void insert(int u,int l,int r,int L,int R,int k){
+	if(L<=l&&r<=R){
+		mi[u]+=k;tag[u]+=k;
+		return;
+	}
+	pushdown(u);
+	if(L<=mid) insert(ls,l,mid,L,R,k);
+	if(R>mid) insert(rs,mid+1,r,L,R,k);
+	mi[u]=min(mi[ls],mi[rs]);
+}
+int query(int u,int l,int r){
+	if(mi[u]>0) return -1;
+	if(l==r) return l;
+	pushdown(u);
+	if(mi[rs]<0) return query(rs,mid+1,r);
+	if(mi[ls]<0) return query(ls,l,mid);
+	return -1;
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	cin>>n>>m;
+	for(int i=1;i<=n;i++){
+		cin>>a[i];
+		insert(1,1,N-1,1,a[i],-1);
+	}
+	for(int i=1;i<=m;i++){
+		cin>>b[i];
+		insert(1,1,N-1,1,b[i],1);
+	}
+	cin>>q;
+	while(q--){
+		int op,i,x;
+		cin>>op>>i>>x;
+		if(op==1){
+			if(x>a[i]) insert(1,1,N-1,a[i]+1,x,-1);
+			else insert(1,1,N-1,x+1,a[i],1);
+            // 这里可以画图理解一下
+            // 就是减去原本 a_i 的贡献，加上 x_i 的贡献，影响的就是不重叠的那段区间
+			a[i]=x;
+		}
+		else{
+			if(x>b[i]) insert(1,1,N-1,b[i]+1,x,1);
+			else insert(1,1,N-1,x+1,b[i],-1);
+			b[i]=x;			
+		}
+		cout<<query(1,1,N-1)<<'\n';
+	}
+	return 0;
+}
+```
+## CF85D
+```cpp
+#include<iostream>
+#define int long long
+#define mid ((l+r)>>1)
+#define ls(x) tr[x].ls
+#define rs(x) tr[x].rs
+using namespace std;
+const int N=3e5+10,M=1e9;
+int n,rt,tot;
+struct Node{
+	int cnt,sum[5],ls,rs;
+}tr[N<<3];
+void pushup(int u){
+	tr[u].cnt=tr[ls(u)].cnt+tr[rs(u)].cnt;
+	for(int i=0;i<5;i++){
+		tr[u].sum[i]=tr[ls(u)].sum[i]+tr[rs(u)].sum[((i-tr[ls(u)].cnt)%5+5)%5];
+	}
+}
+void add(int &u,int l,int r,int U){
+	if(!u) u=++tot;
+	if(l==r){
+		tr[u].sum[1]=U;tr[u].cnt=1;
+		return;
+	}
+	if(U<=mid) add(ls(u),l,mid,U);
+	else add(rs(u),mid+1,r,U);
+	pushup(u);
+}
+void del(int &u,int l,int r,int U){
+	if(!u) u=++tot;
+	if(l==r){
+		tr[u].sum[1]=tr[u].cnt=0;
+		return;
+	}
+	if(U<=mid) del(ls(u),l,mid,U);
+	else del(rs(u),mid+1,r,U);
+	pushup(u);	
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	cin>>n;
+	while(n--){
+		string op;int x;
+		cin>>op;
+		if(op=="sum"){
+			cout<<tr[1].sum[3]<<'\n';
+			continue;
+		}
+		cin>>x;
+		if(op=="add") add(rt,1,M,x);
+		else if(op=="del") del(rt,1,M,x);
+	}
+	return 0;
+}
+```
+## LuoguP3071
+```cpp
+#include<iostream>
+#define int long long
+#define ls u<<1
+#define rs u<<1|1
+#define mid ((l+r)>>1)
+using namespace std;
+const int N=5e5+10;
+int n,m,ans;
+struct Node{
+	int lma,rma,ma,tag;
+}tr[N<<2];
+void pushup(int u,int l,int r){
+	tr[u].ma=max(max(tr[ls].ma,tr[rs].ma),tr[ls].rma+tr[rs].lma);
+	if(tr[ls].ma==mid-l+1) tr[u].lma=tr[ls].ma+tr[rs].lma;
+	else tr[u].lma=tr[ls].lma;
+	if(tr[rs].ma==r-mid) tr[u].rma=tr[rs].ma+tr[ls].rma;
+	else tr[u].rma=tr[rs].rma;
+}
+void build(int u,int l,int r){
+	tr[u].lma=tr[u].rma=tr[u].ma=r-l+1;
+	tr[u].tag=-1;
+	if(l==r) return;
+	build(ls,l,mid);
+	build(rs,mid+1,r);
+	pushup(u,l,r);
+}
+void pushdown(int u,int l,int r){
+	if(tr[u].tag==-1) return;
+	if(tr[u].tag==1){//覆盖
+		tr[ls].lma=tr[ls].rma=tr[ls].ma=0;
+		tr[rs].lma=tr[rs].rma=tr[rs].ma=0;
+	}
+	else{//清空
+		tr[ls].lma=tr[ls].rma=tr[ls].ma=mid-l+1;
+		tr[rs].lma=tr[rs].rma=tr[rs].ma=r-mid;
+	}
+	tr[ls].tag=tr[rs].tag=tr[u].tag;
+	tr[u].tag=-1;		
+}
+int query(int u,int l,int r,int k){
+	pushdown(u,l,r);
+	if(l==r) return l;
+	if(tr[ls].ma>=k) return query(ls,l,mid,k);
+	else if(tr[ls].rma+tr[rs].lma>=k) return mid-tr[ls].rma+1;
+	else return query(rs,mid+1,r,k);
+	//先选左边，再选中间，再选右边
+}
+void update(int u,int l,int r,int L,int R,bool op){
+	if(L<=l&&r<=R){
+		if(op==1) tr[u].lma=tr[u].rma=tr[u].ma=0;
+		else tr[u].lma=tr[u].rma=tr[u].ma=r-l+1;
+		tr[u].tag=op;
+		return;
+	}
+	pushdown(u,l,r);
+	if(L<=mid) update(ls,l,mid,L,R,op);
+	if(R>mid) update(rs,mid+1,r,L,R,op);
+	pushup(u,l,r);
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	freopen("seating.in","r",stdin);
+	freopen("seating.out","w",stdout);
+	cin>>n>>m;
+	build(1,1,n);
+	while(m--){
+		char op;
+		int a,b;
+		cin>>op>>a;
+		if(op=='A'){
+			if(tr[1].ma<a) ans++;
+			else{
+				int pos=query(1,1,n,a);
+				update(1,1,n,pos,pos+a-1,1);
+			}
+		}
+		else{
+			cin>>b;
+			update(1,1,n,a,b,0);
+		}
+	}
+	cout<<ans;
+	return 0;
 }
 ```
