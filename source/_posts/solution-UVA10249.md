@@ -1,11 +1,12 @@
 ---
 title: 题解：UVA10249 - The Grand Dinner
 date: 2025-03-07 08:03:00
-excerpt: 网络流
+excerpt: 网络流 最大流
 categories: 
     - 题解
 tags: 
     - 网络流
+    - 最大流
 ---
 
 ### 题意

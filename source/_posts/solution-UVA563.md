@@ -1,11 +1,12 @@
 ---
 title: 题解：UVA563 - Crimewave
 date: 2025-03-07 09:44:00
-excerpt: 网络流
+excerpt: 网络流 最大流
 categories: 
     - 题解
 tags: 
     - 网络流
+    - 最大流
 ---
 
 ### 题意
