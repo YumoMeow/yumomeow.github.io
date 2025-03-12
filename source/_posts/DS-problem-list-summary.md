@@ -3,7 +3,7 @@ title: 数据结构题单总结
 date: 2025-02-21 14:42:00
 excerpt: wyq布置的数据结构题。。
 categories: 
-	- 题单总结
+	- 总结
 tags:
 	- 数据结构
 	- 并查集

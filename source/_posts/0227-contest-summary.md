@@ -3,7 +3,7 @@ title: 2.27模拟赛总结
 date: 2025-02-27 18:21:00
 excerpt: wyq布置的模拟赛题。。
 categories: 
-    - 模拟赛总结
+    - 总结
 tags: 
     - 动态规划
     - 最短路
