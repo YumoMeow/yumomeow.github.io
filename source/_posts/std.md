@@ -2666,3 +2666,265 @@ signed main(){
 	return 0;
 }
 ```
+
+## LuoguP2756
+```cpp
+#include<ctime>
+#include<iostream>
+#include<queue>
+#include<cstring>
+#define int long long
+using namespace std;
+double START=clock();
+const int N=500,INF=1e9;
+int n,m,head[N],tot=1,dep[N],cur[N],s,t;
+struct Edge{
+    int to,nxt,f;
+}e[50010];
+void addedge(int u,int v,int c){
+    e[++tot].nxt=head[u];
+    e[tot].to=v;
+    e[tot].f=c;
+    head[u]=tot;
+}
+bool bfs(){
+    queue<int> q;
+    memset(dep,-1,sizeof(dep));
+    q.push(s);
+    dep[s]=0;cur[s]=head[s];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(e[i].f&&dep[v]==-1){
+                dep[v]=dep[u]+1;
+                cur[v]=head[v];
+                if(v==t) return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==t) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        cur[u]=i;
+        int v=e[i].to;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            e[i].f-=t;e[i^1].f+=t;
+            flow+=t;
+        }
+    }
+    return flow;
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin>>m>>n;
+    s=n+1,t=n+2;
+    for(int i=1;i<=m;i++){
+        addedge(s,i,1);
+        addedge(i,s,0);
+    }
+    for(int i=m+1;i<=n;i++){
+        addedge(i,t,1);
+        addedge(t,i,0);
+    }
+    int u,v;
+    while(cin>>u>>v){
+        if(u==-1) break;
+        addedge(u,v,1);
+        addedge(v,u,0);
+    }
+    int ans=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(s,INF)) ans+=flow;
+    }
+    cout<<ans<<'\n';
+    for(int i=1;i<=m;i++){
+        for(int j=head[i];j;j=e[j].nxt){
+            if(!e[j].f&&e[j].to<=n) cout<<i<<' '<<e[j].to<<'\n';
+        }
+    }
+    cerr<<"\nTime: "<<clock()-START<<"ms"<<endl;
+    return 0;
+}
+```
+## LuoguP3254
+```cpp
+#include<ctime>
+#include<iostream>
+#include<queue>
+#include<cstring>
+#define int long long
+using namespace std;
+double START=clock();
+const int N=1000,INF=1e9;
+int n,m,s,t,tot=1,dep[N],cur[N],head[N];
+struct Edge{
+    int to,nxt,f;
+}e[100000];
+void addedge(int u,int v,int c){
+    e[++tot].nxt=head[u];e[tot].to=v;e[tot].f=c;
+    head[u]=tot;
+    e[++tot].nxt=head[v];e[tot].to=u;e[tot].f=0;
+    head[v]=tot;
+}
+bool bfs(){
+    queue<int> q;
+    memset(dep,-1,sizeof(dep));
+    q.push(s);
+    dep[s]=0;cur[s]=head[s];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(dep[v]==-1&&e[i].f){
+                dep[v]=dep[u]+1;cur[v]=head[v];
+                if(v==t) return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==t) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        cur[u]=i;
+        int v=e[i].to;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            flow+=t;
+            e[i].f-=t;e[i^1].f+=t;
+        }
+    }
+    return flow;
+}
+int sum;
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin>>m>>n;
+    s=n+m+1,t=n+m+2;
+    for(int i=1,r;i<=m;i++){
+        cin>>r;sum+=r;
+        addedge(s,i,r);
+        for(int j=m+1;j<=n+m;j++){
+            addedge(i,j,1);
+        }        
+    }
+    for(int i=m+1,c;i<=n+m;i++){
+        cin>>c;
+        addedge(i,t,c);
+    }
+    int ans=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(s,INF)) ans+=flow;
+    }
+    cerr<<ans<<'\n';
+    if(ans!=sum){
+        cout<<0;
+        return 0;
+    }
+    cout<<"1\n";
+    for(int i=1;i<=m;i++){
+        for(int j=head[i];j;j=e[j].nxt){
+            if(e[j].to>m&&e[j].f==0) cout<<e[j].to-m<<' ';
+        }
+        cout<<'\n';
+    }
+    cerr<<"\nTime: "<<clock()-START<<"ms"<<endl;
+    return 0;
+}
+```
+## LuoguP2891
+```cpp
+#include<ctime>
+#include<iostream>
+#include<cstring>
+#include<queue>
+#define int long long
+using namespace std;
+double START=clock();
+const int N=50000,INF=1e9;
+int n,f,d,head[N],dep[N],cur[N],s,t,tot=1;
+struct Edge{
+    int to,nxt,f;
+}e[N];
+void addedge(int u,int v,int c){
+    e[++tot]={v,head[u],c};
+    head[u]=tot;
+    e[++tot]={u,head[v],0};
+    head[v]=tot;
+}
+bool bfs(){
+    queue<int> q;
+    memset(dep,-1,sizeof(dep));
+    q.push(s);dep[s]=0;cur[s]=head[s];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(dep[v]==-1&&e[i].f){
+                dep[v]=dep[u]+1;
+                cur[v]=head[v];
+                if(v==t)return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==t) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        int v=e[i].to;
+        cur[u]=i;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            e[i].f-=t,e[i^1].f+=t;
+            flow+=t;
+        }
+    }
+    return flow;
+}
+signed main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin>>n>>f>>d;
+    s=f+n+n+d+1,t=s+1;
+    for(int i=1;i<=f;i++) addedge(s,i,1);
+    for(int i=f+n+n+1;i<s;i++) addedge(i,t,1);
+    for(int i=f+1;i<=f+n;i++) addedge(i,i+n,1);
+    for(int i=1,ff,dd,x;i<=n;i++){
+        cin>>ff>>dd;
+        for(int j=1;j<=ff;j++){
+            cin>>x;
+            addedge(x,i+f,1);
+        }
+        for(int j=1;j<=dd;j++){
+            cin>>x;
+            addedge(i+f+n,x+f+n+n,1);
+        }
+    }
+    int r=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(s,INF)) r+=flow;
+    }
+    cout<<r;
+    cerr<<"\nTime: "<<clock()-START<<"ms"<<endl;
+    return 0;
+}
+```
