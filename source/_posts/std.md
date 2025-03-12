@@ -2928,3 +2928,384 @@ signed main(){
     return 0;
 }
 ```
+## POJ3204
+```cpp
+#include<iostream>
+#include<cstring>
+#include<queue>
+#define int long long
+using namespace std;
+const int N=510,M=10010,INF=1e9;
+int n,m,s,t,dep[N],head[N],cur[N],tot=1;
+bool vis_s[N],vis_t[N];
+struct Edge{
+	int to,nxt,f;
+}e[M];
+void addedge(int u,int v,int c){
+	e[++tot]={v,head[u],c};
+	head[u]=tot;
+	e[++tot]={u,head[v],0};
+	head[v]=tot;
+}
+bool bfs(){
+	queue<int> q;
+	memset(dep,-1,sizeof(dep));
+	q.push(s);dep[s]=0;cur[s]=head[s];
+	while(q.size()){
+		int u=q.front();q.pop();
+		for(int i=head[u];i;i=e[i].nxt){
+			int v=e[i].to;
+			if(dep[v]==-1&&e[i].f){
+				dep[v]=dep[u]+1;
+				cur[v]=head[v];
+				if(v==t) return 1;
+				q.push(v);
+			}
+		}
+	}
+	return 0;
+}
+int find(int u,int limit){
+	if(u==t) return limit;
+	int flow=0;
+	for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+		int v=e[i].to;
+		cur[u]=i;
+		if(dep[v]==dep[u]+1&&e[i].f){
+			int t=find(v,min(e[i].f,limit-flow));
+			if(!t) dep[v]=-1;
+			e[i].f-=t;e[i^1].f+=t;
+			flow+=t;
+		}
+	}
+	return flow;
+}
+void dfs(int u,bool st[],bool p){
+	st[u]=1;
+	for(int i=head[u];i;i=e[i].nxt){
+		int j=i^p,v=e[i].to;
+		if(e[j].f&&!st[v]) dfs(v,st,p);
+	}
+}
+signed main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);cout.tie(0);
+	cin>>n>>m;
+	s=1,t=n;
+	while(m--){
+		int a,b,c;
+		cin>>a>>b>>c;
+		addedge(++a,++b,c);
+	}
+	int r=0;
+	while(bfs()){
+		int flow;
+		while(flow=find(s,INF)) r+=flow;
+	}
+	dfs(s,vis_s,0);
+	dfs(t,vis_t,1);
+	int ans=0;
+	for(int i=2;i<=tot;i+=2){
+		if(!e[i].f&&vis_s[e[i^1].to]&&vis_t[e[i].to]) ans++;
+	}
+	cout<<ans;
+	return 0;
+}
+```
+## LuoguP2274
+```cpp
+#include<iostream>
+#include<cstring>
+#include<queue>
+#define int long long
+using namespace std;
+const int N=10010,INF=1e9;
+int S,T,n,m,head[N],cur[N],dep[N],tot=1,sum;
+int dx[]={0,1,0,-1},dy[]={1,0,-1,0};
+struct Edge{int to,nxt,f;}e[100010];
+int hsh(int a,int b){return (a-1)*m+b;}
+void add(int u,int v,int c){
+    e[++tot]={v,head[u],c};head[u]=tot;
+    e[++tot]={u,head[v],0};head[v]=tot;
+}
+bool bfs(){
+    queue<int> q;
+    memset(dep,-1,sizeof(dep));
+    q.push(S);dep[S]=0;cur[S]=head[S];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(dep[v]==-1&&e[i].f){
+                cur[v]=head[v];dep[v]=dep[u]+1;
+                if(v==T) return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==T) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        int v=e[i].to;cur[u]=i;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            e[i].f-=t;e[i^1].f+=t;flow+=t;
+        }
+    }
+    return flow;
+}
+signed main(){
+    cin>>n>>m;
+    S=n*m+1,T=S+1;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            int x;
+            cin>>x;sum+=x;
+            if(!((i+j)%2)){
+                add(S,hsh(i,j),x);
+                for(int k=0;k<4;k++){
+                    int tx=i+dx[k],ty=j+dy[k];
+                    if(tx==0||ty==0||tx>n||ty>m) continue;
+                    add(hsh(i,j),hsh(tx,ty),INF);
+                }
+            }
+            else add(hsh(i,j),T,x);
+
+        }
+    }
+    int r=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(S,INF)) r+=flow;
+    }
+    cout<<sum-r;
+    return 0;  
+}
+```
+## BZOJ3275
+```cpp
+#include<iostream>
+#include<queue>
+#include<cstring>
+#include<cmath>
+using namespace std;
+const int N=3010,INF=1e9;
+int n,a[N],head[N],cur[N],dep[N],tot=1,S,T,sum;
+struct Edge{int to,nxt,f;}e[50010];
+void add(int u,int v,int c){
+    e[++tot]={v,head[u],c};head[u]=tot;
+    e[++tot]={u,head[v],0};head[v]=tot;
+}
+int gcd(int x,int y){return y==0?x:gcd(y,x%y);}
+bool bfs(){
+    queue<int> q;
+    memset(dep,-1,sizeof(dep));
+    q.push(S);dep[S]=0;cur[S]=head[S];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(dep[v]==-1&&e[i].f){
+                dep[v]=dep[u]+1;cur[v]=head[v];
+                if(v==T) return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==T) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        cur[u]=i;int v=e[i].to;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            e[i].f-=t;e[i^1].f+=t;flow+=t;
+        }
+    }
+    return flow;
+}
+int main(){
+    cin>>n;
+    S=n+1,T=S+1;
+    for(int i=1;i<=n;i++) cin>>a[i];
+    for(int i=1;i<=n;i++){
+        sum+=a[i];
+        if(a[i]%2){
+            add(S,i,a[i]);
+            for(int j=1;j<=n;j++){
+                int k=sqrt(a[i]*a[i]+a[j]*a[j]);
+                if(gcd(a[i],a[j])==1&&k*k==a[i]*a[i]+a[j]*a[j]) add(i,j,INF);
+            }
+        }
+        else add(i,T,a[i]);
+    }
+    int r=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(S,INF)) r+=flow;
+    }
+    cout<<sum-r;
+    return 0;
+}
+```
+## LuoguP4015
+```cpp
+#include<iostream>
+#include<queue>
+#include<cstring>
+using namespace std;
+const int N=510,INF=0x3f3f3f3f;
+int m,n,S,T,head[N],dis[N],incf[N],pre[N],tot=1,cost;
+bool vis[N];
+struct Edge{int to,nxt,f,w;}e[50010];
+void add(int u,int v,int c,int w){
+    e[++tot]={v,head[u],c,w};head[u]=tot;
+    e[++tot]={u,head[v],0,-w};head[v]=tot;
+}
+bool spfa(){
+    queue<int> q;
+    memset(vis,0,sizeof(vis));
+    memset(dis,0x3f,sizeof(dis));
+    q.push(S);dis[S]=0;vis[S]=1;incf[S]=INF;
+    while(q.size()){
+        int u=q.front();q.pop();
+        vis[u]=0;
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(e[i].f&&dis[v]>dis[u]+e[i].w){
+                dis[v]=dis[u]+e[i].w;
+                incf[v]=min(incf[u],e[i].f);
+                pre[v]=i;
+                if(!vis[v]) vis[v]=1,q.push(v);
+            }
+        }
+    }
+    return dis[T]!=INF;
+}
+void EK(){
+    while(spfa()){
+        cost+=dis[T]*incf[T];
+        for(int i=T;i!=S;i=e[pre[i]^1].to){
+            e[pre[i]].f-=incf[T];
+            e[pre[i]^1].f+=incf[T];
+        }
+    }
+}
+int main(){
+    cin>>m>>n;
+    S=m+n+1,T=S+1;
+    for(int i=1,x;i<=m;i++){
+        cin>>x;
+        add(S,i,x,0);
+    }
+    for(int i=1,x;i<=n;i++){
+        cin>>x;
+        add(i+m,T,x,0);
+    }
+    for(int i=1;i<=m;i++){
+        for(int j=1,x;j<=n;j++){
+            cin>>x;
+            add(i,j+m,INF,x);
+        }
+    }
+    EK();
+    cout<<cost<<'\n';
+    for(int i=2;i<=tot;i++){
+        e[i].w*=-1;
+        if(!(i%2))e[i].f+=e[i^1].f,e[i^1].f=0;
+    }
+    cost=0;
+    EK();
+    cout<<-cost;
+    return 0;
+}
+```
+## LuoguP4012
+```cpp
+#include<iostream>
+#include<cstring>
+#include<queue>
+using namespace std;
+const int N=1e4+10,M=1e5+10,INF=0x3f3f3f3f;
+int a,b,p,q,id[N][N],tot_,tot=1,pre[N],incf[N],dis[N],head[N],S,T;
+bool vis[N];
+struct Edge{int to,nxt,f,w;}e[M];
+void add(int u,int v,int c,int w){
+    e[++tot]={v,head[u],c,-w};head[u]=tot;
+    e[++tot]={u,head[v],0,w};head[v]=tot;
+}
+bool spfa(){
+    queue<int> q;q.push(S);
+    memset(dis,0x3f,sizeof(dis));
+    memset(vis,0,sizeof(vis));
+    dis[S]=0;vis[S]=1;incf[S]=INF;
+    while(q.size()){
+        int u=q.front();q.pop();
+        vis[u]=0;
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(e[i].f&&dis[v]>dis[u]+e[i].w){
+                dis[v]=dis[u]+e[i].w;
+                incf[v]=min(incf[u],e[i].f);
+                pre[v]=i;
+                if(!vis[v]) vis[v]=1,q.push(v);
+            }
+        }
+    }
+    return dis[T]!=INF;
+}
+int EK(){
+    int cost=0;
+    while(spfa()){
+        cost+=dis[T]*incf[T];
+        for(int i=T;i!=S;i=e[pre[i]^1].to){
+            e[pre[i]].f-=incf[T];
+            e[pre[i]^1].f+=incf[T];
+        }
+    }
+    return cost;
+}
+int main(){
+    S=++tot_;T=++tot_;
+    cin>>a>>b>>p>>q;
+    for(int i=0;i<=p+1;i++){
+        for(int j=0;j<=q+1;j++){
+            id[i][j]=++tot_;
+        }
+    }
+    for(int i=0;i<=p;i++){
+        for(int j=0,x;j<q;j++){
+            cin>>x;
+            add(id[i][j],id[i][j+1],1,x);
+            add(id[i][j],id[i][j+1],INF,0);
+
+        }
+    }
+    for(int i=0;i<=q;i++){
+        for(int j=0,x;j<p;j++){
+            cin>>x;
+            add(id[j][i],id[j+1][i],1,x);
+            add(id[j][i],id[j+1][i],INF,0);
+        }
+    }
+    while(a--){
+        int k,y,x;
+        cin>>k>>x>>y;
+        add(S,id[x][y],k,0);
+    }
+    while(b--){
+        int k,y,x;
+        cin>>k>>x>>y;
+        add(id[x][y],T,k,0);
+    }
+    cout<<-EK();
+    return 0;
+}
+```
