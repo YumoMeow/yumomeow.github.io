@@ -27,7 +27,7 @@
 <meta property="og:description" content="二分 网络流 最大流">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-14T09:32:00.000Z">
-<meta property="article:modified_time" content="2025-03-14T10:00:23.709Z">
+<meta property="article:modified_time" content="2025-03-14T10:03:08.306Z">
 <meta property="article:author" content="雨沫">
 <meta property="article:tag" content="网络流">
 <meta property="article:tag" content="最大流">
@@ -308,115 +308,7 @@
 <p>从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span> 向红色棋子连边，蓝色棋子向 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span> 连边。设当前答案为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">d</span></span></span></span>，每次以每个棋子为起点 bfs 求出到其他所有点的距离，若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\le mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">d</span></span></span></span> 则可达，若是红色棋子则由棋子向入点连边，否则由出点向棋子连边，跑最大流即可。</p>
 <p>每一个连接红色棋子、棋盘、蓝色棋子的路径表示一个格子上同时有两个棋子，提供 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 的流量。若流量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\ge \frac{a+b+1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">b</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 则表示可以满足限制。需要卡常。</p>
 <h3 id="代码">代码</h3>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;queue&gt;
-#define int long long
-#define reg register
-#define il inline
-using namespace std;
-const int N=3010,M=2e6+10,INF=0x3f3f3f3f3f3f3f3f;
-int n,m,a,b,r,c,t,dis[23][23],idx,hsh[23][23][2];
-int S,T,cur[N],head[N],dep[N],tot;
-int dx[]=&#123;0,1,0,-1&#125;,dy[]=&#123;1,0,-1,0&#125;;
-char mp[50][50];
-struct Edge&#123;int to,nxt,f;&#125;e[M];
-struct Node&#123;int x,y,t,id;&#125;ma[510],fe[510];
-il void add(int u,int v,int c)&#123;
-    e[++tot]=&#123;v,head[u],c&#125;;head[u]=tot;
-    e[++tot]=&#123;u,head[v],0&#125;;head[v]=tot;
-&#125;
-il bool bfs()&#123;
-    queue&lt;int&gt; q;q.push(S);
-    memset(dep,-1,sizeof(dep));
-    dep[S]=0;cur[S]=head[S];
-    while(q.size())&#123;
-        int u=q.front();q.pop();
-        for(reg int i=head[u];i;i=e[i].nxt)&#123;
-            int v=e[i].to;
-            if(dep[v]==-1&amp;&amp;e[i].f)&#123;
-                dep[v]=dep[u]+1;
-                cur[v]=head[v];
-                if(v==T) return 1;
-                q.push(v);
-            &#125;
-        &#125;
-    &#125;
-    return 0;
-&#125;
-il int find(int u,int limit)&#123;
-    if(u==T) return limit;
-    int flow=0;
-    for(reg int i=cur[u];i&amp;&amp;flow&lt;limit;i=e[i].nxt)&#123;
-        int v=e[i].to;cur[u]=i;
-        if(dep[v]==dep[u]+1&amp;&amp;e[i].f)&#123;
-            int t=find(v,min(e[i].f,limit-flow));
-            if(!t) dep[v]=-1;
-            e[i].f-=t;e[i^1].f+=t;flow+=t;
-        &#125;
-    &#125;
-    return flow;
-&#125;
-il int Dinic()&#123;
-    int r=0;
-    while(bfs())&#123;
-        int flow;
-        while(flow=find(S,INF)) r+=flow;
-    &#125;
-    return r;
-&#125;
-il void getdis(Node now,int limit,bool op)&#123;
-    queue&lt;pair&lt;int,int&gt; &gt; q;
-    memset(dis,0x3f,sizeof(dis));
-    q.push(&#123;now.x,now.y&#125;);dis[now.x][now.y]=0;
-    while(q.size())&#123;
-        int x=q.front().first,y=q.front().second;q.pop();
-        if(dis[x][y]&gt;limit) continue;
-        if(!op) add(now.id,hsh[x][y][0],1);
-        else add(hsh[x][y][1],now.id,1);//两种情况
-        for(reg int i=0;i&lt;4;i++)&#123;
-            int tx=x+dx[i],ty=y+dy[i];
-            if(tx&lt;=n&amp;&amp;ty&lt;=m&amp;&amp;tx&gt;0&amp;&amp;ty&gt;0&amp;&amp;dis[tx][ty]&gt;dis[x][y]+now.t&amp;&amp;mp[tx][ty]!='#')&#123;
-                dis[tx][ty]=dis[x][y]+now.t;q.push(&#123;tx,ty&#125;);
-            &#125;
-        &#125;
-    &#125;
-    return;
-&#125;
-il bool check(int x)&#123;
-    tot=1;memset(head,0,sizeof(head));
-    for(reg int i=1;i&lt;=a;i++) add(S,ma[i].id,1),getdis(ma[i],x,0);
-    for(reg int i=1;i&lt;=b;i++) add(fe[i].id,T,1),getdis(fe[i],x,1);//根据距离连边
-    for(reg int i=1;i&lt;=n;i++) for(reg int j=1;j&lt;=m;j++) add(hsh[i][j][0],hsh[i][j][1],1);//入点和出点连边
-    return Dinic()&gt;=a;
-&#125;
-signed main()&#123;
-    ios::sync_with_stdio(0);
-    cin.tie(0);cout.tie(0);
-    cin&gt;&gt;n&gt;&gt;m&gt;&gt;a&gt;&gt;b;
-    for(reg int i=1;i&lt;=n;i++)for(reg int j=1;j&lt;=m;j++)cin&gt;&gt;mp[i][j];
-    cin&gt;&gt;r&gt;&gt;c&gt;&gt;t;
-    for(reg int i=1;i&lt;=a;i++) cin&gt;&gt;ma[i].x&gt;&gt;ma[i].y&gt;&gt;ma[i].t,ma[i].id=++idx;
-    for(reg int i=1;i&lt;=b;i++) cin&gt;&gt;fe[i].x&gt;&gt;fe[i].y&gt;&gt;fe[i].t,fe[i].id=++idx;
-    if(a&lt;b) ma[++a].x=r,ma[a].y=c,ma[a].t=t,ma[a].id=++idx;
-    else fe[++b].x=r,fe[b].y=c,fe[b].t=t,fe[b].id=++idx;
-    for(reg int i=1;i&lt;=n;i++)for(reg int j=1;j&lt;=m;j++)for(reg int k=0;k&lt;=1;k++) hsh[i][j][k]=++idx;
-    S=++idx;T=++idx;
-    if(a!=b)&#123;
-        cout&lt;&lt;-1;
-        return 0;
-    &#125;
-    int l=0,ans=-1;r=1e12;
-    while(l&lt;=r)&#123;
-        int mid=(l+r)&gt;&gt;1;
-        if(check(mid)) r=mid-1,ans=mid;
-        else l=mid+1;
-    &#125;
-    cout&lt;&lt;ans;
-    return 0;
-&#125;
-</code></pre>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> reg register</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> il inline</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">3010</span>,M=<span class="hljs-number">2e6</span><span class="hljs-number">+10</span>,INF=<span class="hljs-number">0x3f3f3f3f3f3f3f3f</span>;<br><span class="hljs-type">int</span> n,m,a,b,r,c,t,dis[<span class="hljs-number">23</span>][<span class="hljs-number">23</span>],idx,hsh[<span class="hljs-number">23</span>][<span class="hljs-number">23</span>][<span class="hljs-number">2</span>];<br><span class="hljs-type">int</span> S,T,cur[N],head[N],dep[N],tot;<br><span class="hljs-type">int</span> dx[]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;,dy[]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;;<br><span class="hljs-type">char</span> mp[<span class="hljs-number">50</span>][<span class="hljs-number">50</span>];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Edge</span>&#123;<span class="hljs-type">int</span> to,nxt,f;&#125;e[M];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span>&#123;<span class="hljs-type">int</span> x,y,t,id;&#125;ma[<span class="hljs-number">510</span>],fe[<span class="hljs-number">510</span>];<br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v,<span class="hljs-type">int</span> c)</span></span>&#123;<br>    e[++tot]=&#123;v,head[u],c&#125;;head[u]=tot;<br>    e[++tot]=&#123;u,head[v],<span class="hljs-number">0</span>&#125;;head[v]=tot;<br>&#125;<br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span></span>&#123;<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;q.<span class="hljs-built_in">push</span>(S);<br>    <span class="hljs-built_in">memset</span>(dep,<span class="hljs-number">-1</span>,<span class="hljs-built_in">sizeof</span>(dep));<br>    dep[S]=<span class="hljs-number">0</span>;cur[S]=head[S];<br>    <span class="hljs-keyword">while</span>(q.<span class="hljs-built_in">size</span>())&#123;<br>        <span class="hljs-type">int</span> u=q.<span class="hljs-built_in">front</span>();q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=head[u];i;i=e[i].nxt)&#123;<br>            <span class="hljs-type">int</span> v=e[i].to;<br>            <span class="hljs-keyword">if</span>(dep[v]==<span class="hljs-number">-1</span>&amp;&amp;e[i].f)&#123;<br>                dep[v]=dep[u]<span class="hljs-number">+1</span>;<br>                cur[v]=head[v];<br>                <span class="hljs-keyword">if</span>(v==T) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>                q.<span class="hljs-built_in">push</span>(v);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-function">il <span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> limit)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(u==T) <span class="hljs-keyword">return</span> limit;<br>    <span class="hljs-type">int</span> flow=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=cur[u];i&amp;&amp;flow&lt;limit;i=e[i].nxt)&#123;<br>        <span class="hljs-type">int</span> v=e[i].to;cur[u]=i;<br>        <span class="hljs-keyword">if</span>(dep[v]==dep[u]<span class="hljs-number">+1</span>&amp;&amp;e[i].f)&#123;<br>            <span class="hljs-type">int</span> t=<span class="hljs-built_in">find</span>(v,<span class="hljs-built_in">min</span>(e[i].f,limit-flow));<br>            <span class="hljs-keyword">if</span>(!t) dep[v]=<span class="hljs-number">-1</span>;<br>            e[i].f-=t;e[i^<span class="hljs-number">1</span>].f+=t;flow+=t;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> flow;<br>&#125;<br><span class="hljs-function">il <span class="hljs-type">int</span> <span class="hljs-title">Dinic</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> r=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">bfs</span>())&#123;<br>        <span class="hljs-type">int</span> flow;<br>        <span class="hljs-keyword">while</span>(flow=<span class="hljs-built_in">find</span>(S,INF)) r+=flow;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r;<br>&#125;<br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">getdis</span><span class="hljs-params">(Node now,<span class="hljs-type">int</span> limit,<span class="hljs-type">bool</span> op)</span></span>&#123;<br>    queue&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt; &gt; q;<br>    <span class="hljs-built_in">memset</span>(dis,<span class="hljs-number">0x3f</span>,<span class="hljs-built_in">sizeof</span>(dis));<br>    q.<span class="hljs-built_in">push</span>(&#123;now.x,now.y&#125;);dis[now.x][now.y]=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(q.<span class="hljs-built_in">size</span>())&#123;<br>        <span class="hljs-type">int</span> x=q.<span class="hljs-built_in">front</span>().first,y=q.<span class="hljs-built_in">front</span>().second;q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">if</span>(dis[x][y]&gt;limit) <span class="hljs-keyword">continue</span>;<br>        <span class="hljs-keyword">if</span>(!op) <span class="hljs-built_in">add</span>(now.id,hsh[x][y][<span class="hljs-number">0</span>],<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">add</span>(hsh[x][y][<span class="hljs-number">1</span>],now.id,<span class="hljs-number">1</span>);<span class="hljs-comment">//两种情况</span><br>        <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">4</span>;i++)&#123;<br>            <span class="hljs-type">int</span> tx=x+dx[i],ty=y+dy[i];<br>            <span class="hljs-keyword">if</span>(tx&lt;=n&amp;&amp;ty&lt;=m&amp;&amp;tx&gt;<span class="hljs-number">0</span>&amp;&amp;ty&gt;<span class="hljs-number">0</span>&amp;&amp;dis[tx][ty]&gt;dis[x][y]+now.t&amp;&amp;mp[tx][ty]!=<span class="hljs-string">&#x27;#&#x27;</span>)&#123;<br>                dis[tx][ty]=dis[x][y]+now.t;q.<span class="hljs-built_in">push</span>(&#123;tx,ty&#125;);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span>&#123;<br>    tot=<span class="hljs-number">1</span>;<span class="hljs-built_in">memset</span>(head,<span class="hljs-number">0</span>,<span class="hljs-built_in">sizeof</span>(head));<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=a;i++) <span class="hljs-built_in">add</span>(S,ma[i].id,<span class="hljs-number">1</span>),<span class="hljs-built_in">getdis</span>(ma[i],x,<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=b;i++) <span class="hljs-built_in">add</span>(fe[i].id,T,<span class="hljs-number">1</span>),<span class="hljs-built_in">getdis</span>(fe[i],x,<span class="hljs-number">1</span>);<span class="hljs-comment">//根据距离连边</span><br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++) <span class="hljs-built_in">add</span>(hsh[i][j][<span class="hljs-number">0</span>],hsh[i][j][<span class="hljs-number">1</span>],<span class="hljs-number">1</span>);<span class="hljs-comment">//入点和出点连边</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Dinic</span>()&gt;=a;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-number">0</span>);<br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    cin&gt;&gt;n&gt;&gt;m&gt;&gt;a&gt;&gt;b;<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++)cin&gt;&gt;mp[i][j];<br>    cin&gt;&gt;r&gt;&gt;c&gt;&gt;t;<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=a;i++) cin&gt;&gt;ma[i].x&gt;&gt;ma[i].y&gt;&gt;ma[i].t,ma[i].id=++idx;<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=b;i++) cin&gt;&gt;fe[i].x&gt;&gt;fe[i].y&gt;&gt;fe[i].t,fe[i].id=++idx;<br>    <span class="hljs-keyword">if</span>(a&lt;b) ma[++a].x=r,ma[a].y=c,ma[a].t=t,ma[a].id=++idx;<br>    <span class="hljs-keyword">else</span> fe[++b].x=r,fe[b].y=c,fe[b].t=t,fe[b].id=++idx;<br>    <span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++)<span class="hljs-keyword">for</span>(reg <span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;k&lt;=<span class="hljs-number">1</span>;k++) hsh[i][j][k]=++idx;<br>    S=++idx;T=++idx;<br>    <span class="hljs-keyword">if</span>(a!=b)&#123;<br>        cout&lt;&lt;<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> l=<span class="hljs-number">0</span>,ans=<span class="hljs-number">-1</span>;r=<span class="hljs-number">1e12</span>;<br>    <span class="hljs-keyword">while</span>(l&lt;=r)&#123;<br>        <span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(mid)) r=mid<span class="hljs-number">-1</span>,ans=mid;<br>        <span class="hljs-keyword">else</span> l=mid<span class="hljs-number">+1</span>;<br>    &#125;<br>    cout&lt;&lt;ans;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
