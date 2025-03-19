@@ -3309,3 +3309,180 @@ int main(){
     return 0;
 }
 ```
+## LuoguP4174
+```cpp
+#include<iostream>
+#include<queue>
+#include<cstring>
+using namespace std;
+const int N=1e5+10,INF=1e9;
+int n,m,p[N],head[N],cur[N],dep[N],tot=1,S,T,sum;
+struct Edge{int to,nxt,f;}e[N<<2];
+void add(int u,int v,int c){
+    e[++tot]={v,head[u],c};head[u]=tot;
+    e[++tot]={u,head[v],0};head[v]=tot;
+}
+bool bfs(){
+    queue<int> q;q.push(S);
+    memset(dep,-1,sizeof(dep));
+    dep[S]=0;cur[S]=head[S];
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(dep[v]==-1&&e[i].f){
+                dep[v]=dep[u]+1;
+                cur[v]=head[v];
+                if(v==T) return 1;
+                q.push(v);
+            }
+        }
+    }
+    return 0;
+}
+int find(int u,int limit){
+    if(u==T) return limit;
+    int flow=0;
+    for(int i=cur[u];i&&flow<limit;i=e[i].nxt){
+        int v=e[i].to;cur[u]=i;
+        if(dep[v]==dep[u]+1&&e[i].f){
+            int t=find(v,min(e[i].f,limit-flow));
+            if(!t) dep[v]=-1;
+            e[i].f-=t;e[i^1].f+=t;flow+=t;
+        }
+    }
+    return flow;
+}
+int Dinic(){
+    int r=0;
+    while(bfs()){
+        int flow;
+        while(flow=find(S,INF)) r+=flow;
+    }
+    return r;
+}
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin>>n>>m;
+    S=n+m+1,T=S+1;
+    for(int i=1;i<=n;i++) cin>>p[i],add(i,T,p[i]);
+    for(int i=1,a,b,c;i<=m;i++){
+        cin>>a>>b>>c;
+        add(i+n,a,INF);add(i+n,b,INF);
+        add(S,i+n,c);sum+=c;
+    }
+    cout<<sum-Dinic();
+    return 0;
+}
+```
+## LuoguP5996
+```cpp
+#include<iostream>
+#include<algorithm>
+#include<set>
+#define int long long
+#define pii pair<int,int>
+using namespace std;
+const int N=2e5+10;
+int n,m,w,h,sum;
+struct Node{
+	int x,y,v;
+	bool operator < (const Node &t) const{return x<t.x;}
+}a[N],b[N];
+multiset<pii> s;
+signed main(){
+	cin>>n>>m>>w>>h;
+	for(int i=1,x,y;i<=n;i++){
+		cin>>x>>y>>a[i].v;
+		a[i].x=x*h+y*w,a[i].y=x*h-y*w;//转换坐标
+		sum+=a[i].v;
+	}
+	for(int i=1,x,y;i<=m;i++){
+		cin>>x>>y>>b[i].v;
+		b[i].x=x*h+y*w,b[i].y=x*h-y*w;
+	}	
+    //扫描线
+	sort(a+1,a+n+1);sort(b+1,b+m+1);
+	for(int i=1,j=1;i<=m;i++){
+		while(j<=n&&a[j].x<=b[i].x) s.insert({a[j].y,a[j++].v});//将手办加入
+		int limit=b[i].v;
+		while(limit&&s.size()){
+			auto it=s.lower_bound({b[i].y,0});//二分
+			if(it==s.end()) break;
+			pii u=*it;s.erase(it);
+			int flow=min(limit,u.second);
+			sum-=flow;u.second-=flow;limit-=flow;//增广流量
+			if(u.second) s.insert(u);//手办没被榨干，则再次加入 set
+		}
+	}
+	cout<<sum;
+	return 0;
+}
+```
+## LuoguP4043
+```cpp
+#include<iostream>
+#include<cstring>
+#include<queue>
+using namespace std;
+const int N=2010,INF=0x3f3f3f3f;
+int d[N],head[N],tot=1,n,ans,S,T,incf[N],pre[N],dis[N];
+bool vis[N];
+struct Edge{int to,nxt,f,w;}e[200010];
+void add(int u,int v,int c,int w){
+    e[++tot]={v,head[u],c,w};head[u]=tot;
+    e[++tot]={u,head[v],0,-w};head[v]=tot;
+}
+bool SPFA(){
+    queue<int> q;q.push(S);
+    memset(dis,0x3f,sizeof(dis));
+    memset(vis,0,sizeof(vis));
+    dis[S]=0;vis[S]=1;incf[S]=INF;
+    while(q.size()){
+        int u=q.front();q.pop();
+        vis[u]=0;
+        for(int i=head[u];i;i=e[i].nxt){
+            int v=e[i].to;
+            if(e[i].f&&dis[v]>dis[u]+e[i].w){
+                dis[v]=dis[u]+e[i].w;
+                incf[v]=min(incf[u],e[i].f);
+                pre[v]=i;
+                if(!vis[v]) q.push(v);
+            }
+        }
+    }
+    return dis[T]!=INF;
+}
+int EK(){
+    int r=0;
+    while(SPFA()){
+        r+=dis[T]*incf[T];
+        for(int i=T;i!=S;i=e[pre[i]^1].to){
+            e[pre[i]].f-=incf[T];
+            e[pre[i]^1].f+=incf[T];
+        }
+    }
+    return r;
+}
+int main(){
+    cin>>n;
+    for(int i=1,k;i<=n;i++){
+        cin>>k;
+        for(int j=1,b,t;j<=k;j++){
+            cin>>b>>t;
+            d[i]--;d[b]++;ans+=t;
+            add(i,b,INF,t);
+        }
+    }
+    S=n+2,T=n+3;
+    for(int i=2;i<=n;i++) add(i,n+1,INF,0);
+    for(int i=1;i<=n;i++){
+        if(d[i]>0) add(S,i,d[i],0);
+        else if(d[i]<0) add(i,T,-d[i],0);
+    }
+    add(n+1,1,INF,0);
+    cout<<ans+EK()<<endl;
+    return 0;
+}
+```
