@@ -1,5 +1,5 @@
 ---
-title: 2.27模拟赛总结
+title: 2.27 模拟赛总结
 date: 2025-02-27 18:21:00
 excerpt: wyq布置的模拟赛题。。
 categories: 

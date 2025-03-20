@@ -1,5 +1,5 @@
 ---
-title: 2.10模拟赛总结
+title: 2.10 模拟赛总结
 date: 2025-02-10 21:06:00
 excerpt: wyq布置的模拟赛题。。
 categories: 
