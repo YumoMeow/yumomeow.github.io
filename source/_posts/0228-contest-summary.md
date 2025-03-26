@@ -5,8 +5,9 @@ excerpt: wyq布置的模拟赛题。。
 categories: 
     - 总结
 tags: 
-    - 线段树
-    - 分块
+	- 数据结构
+	- 线段树
+	- 分块
 ---
 
 ## [A. CF1179C - Serge and Dining Room](https://codeforces.com/problemset/problem/1179/C)

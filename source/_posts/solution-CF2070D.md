@@ -1,12 +1,12 @@
 ---
 title: 题解：CF2070D - Tree Jumps
 date: 2025-03-26 18:38:00
-excerpt: 区间dp
+excerpt: 区间 DP
 categories: 
     - 题解
 tags: 
-    - 区间dp
     - 动态规划
+    - 区间 DP
 ---
 ### 题意
 给定一棵树，可以从一个节点走到下一层的节点，但当处在非根节点时不可以走到儿子节点，求合法走法的方案数。

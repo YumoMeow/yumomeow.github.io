@@ -1,10 +1,11 @@
 ---
 title: 题解：UVA1515 - Pool construction
 date: 2025-03-07 15:20:00
-excerpt: 网络流 最小割
+excerpt: 图论 网络流 最小割
 categories: 
     - 题解
 tags: 
+    - 图论
     - 网络流
     - 最小割
 ---

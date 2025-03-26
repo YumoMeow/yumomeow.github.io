@@ -1,11 +1,12 @@
 ---
 title: 题解：CF513F - Scaygerboss
 date: 2025-03-14 17:32:00
-excerpt: 二分 网络流 最大流
+excerpt: 二分答案 图论 网络流 最大流
 categories: 
     - 题解
 tags: 
-    - 二分
+    - 二分答案
+    - 图论
     - 网络流
     - 最大流
 ---

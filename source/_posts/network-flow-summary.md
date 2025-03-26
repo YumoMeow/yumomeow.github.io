@@ -5,6 +5,7 @@ excerpt: 网络流学习总结。。
 categories: 
 	- 总结
 tags:
+    - 图论
     - 网络流
     - 最大流
     - 最小割

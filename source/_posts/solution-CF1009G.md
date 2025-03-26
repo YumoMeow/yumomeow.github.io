@@ -1,10 +1,11 @@
 ---
 title: 题解：CF1009G - Allowed Letters
 date: 2025-03-24 09:18:00
-excerpt: 二分图
+excerpt: 图论 二分图
 categories: 
     - 题解
 tags: 
+    - 图论
     - 二分图
 ---
 ### 题意

@@ -5,8 +5,11 @@ excerpt: wyq布置的模拟赛题。。
 categories: 
     - 总结
 tags: 
+    - 数据结构
     - 线段树
-    - 区间dp
+    - 动态规划
+    - 区间 DP
+    - 数学
 ---
 找了几个往年的 NOIP 真题来做。
 ## [A. LuoguP11362 - 遗失的赋值](https://www.luogu.com.cn/problem/P11362)

@@ -6,11 +6,13 @@ categories:
     - 总结
 tags: 
     - 数据结构
+    - 堆
     - 动态规划
+    - 图论
     - 拓扑排序
+    - 字符串
     - 哈希
     - KMP
-    - 堆
 ---
 
 ## [A. LuoguP9981 - Minimum Longest Trip](https://www.luogu.com.cn/problem/P9981)
