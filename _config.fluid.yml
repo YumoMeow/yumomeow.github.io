@@ -453,6 +453,7 @@ footer:
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener" style="color: white"><span>Hexo</span></a>
     <i class="iconfont icon-love" style="color: white"></i>
     <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener" style="color: white"><span>Fluid</span></a>
+    <br>
     <a href="https://icp.gov.moe/?keyword=20251185" target="_blank" style="color: white">萌ICP备20251185号</a>
     <!-- 博客上线天数 -->
     <div>
@@ -460,7 +461,6 @@ footer:
       <span id="times" style="color: white">载入时分秒...</span>
       <script src="/js/duration.js"></script>
     </div>
-    
 '
 
   # 展示网站的 PV、UV 统计数
