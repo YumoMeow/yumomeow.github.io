@@ -777,13 +777,13 @@ sup > a::before,
   padding: 3rem 0;
 }
 html {
-  font-size: 17px;
+  font-size: 16px;
   letter-spacing: 0.02em;
 }
 html,
 body {
   height: 100%;
-  font-family: LXGW WenKai Screen;
+  font-family: Noto Serif SC;
   overflow-wrap: break-word;
 }
 body {
@@ -874,7 +874,7 @@ i.iconfont {
   }
   :root:not([data-user-color-scheme]) {
     --body-bg-color: #181c27;
-    --board-bg-color: #00000093;
+    --board-bg-color: #00000080;
     --text-color: #c4c6c9;
     --sec-text-color: #a7a9ad;
     --post-text-color: #c4c6c9;
@@ -928,7 +928,7 @@ i.iconfont {
 @media not print {
   [data-user-color-scheme="dark"] {
     --body-bg-color: #181c27;
-    --board-bg-color: #00000093;
+    --board-bg-color: #00000080;
     --text-color: #c4c6c9;
     --sec-text-color: #a7a9ad;
     --post-text-color: #c4c6c9;
@@ -1436,7 +1436,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: LXGW WenKai Screen;
+  font-family: Noto Serif SC;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
