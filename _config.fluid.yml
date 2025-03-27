@@ -1003,7 +1003,7 @@ about:
     - { class: "iconfont icon-twitter-fill", link: "https://x.com/MinaseAyano", tip: "Twitter" }
     - { class: "iconfont icon-bilibili", link: "https://space.bilibili.com/539077277", tip: "Bilibili"}
     - { class: "iconfont icon-mail", link: "mailto:pink_dove@outlook.com", tip: "E-mail"}
-    - { class: "iconfont icon-telegram-fill", link: "about:blank", tip: "Telegram"}
+    - { class: "iconfont icon-telegram-fill", link: "t.me/yumonya", tip: "Telegram"}
 
 #---------------------------
 # 自定义页
