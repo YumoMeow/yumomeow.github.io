@@ -1,0 +1,23 @@
+.svg {
+    width: 200pt;
+    height: 30pt;
+}
+  
+path {
+    stroke: #e5e6e9;
+    stroke-width: 1.1pt;
+    stroke-linecap: round;
+    stroke-dasharray: var(--l);
+    stroke-dashoffset: var(--l);
+    fill: none;
+    fill-rule: nonzero;
+    animation: stroke 25s forwards;
+    -webkit-animation: stroke 25s forwards;
+  }
+  
+  @keyframes stroke {
+    to {
+      stroke-dashoffset: 0;
+      /* fill: white; */
+    }
+  }
