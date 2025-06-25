@@ -7,6 +7,8 @@ categories:
 tags: 
     - 喵喵喵！！喵喵！！
 ---
+# Miku镇楼
+![](/img/chengdu-chongqing-youji/p48.jfif?400x)
 
 ## 绪论
 中考完了和 [岑岑](https://x.com/zcz1016) 去成都和重庆玩了几天，遂决定写个游记，顺便 OI 课上摸个鱼。都是 6.25 凭记忆写的，语言混乱+流水账致歉（
