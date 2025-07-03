@@ -2,7 +2,6 @@
 title: 6.16-6.23 成渝游记
 date: 2025-06-25 09:20:00
 excerpt: 去成渝玩了几天，摸鱼写点游记
-hide: true
 categories: 
     - 游记
 tags: 
