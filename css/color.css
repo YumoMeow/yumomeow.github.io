@@ -1,0 +1,7 @@
+.tocbot-active-link {
+    font-weight: normal;
+    color: #fff;
+}
+.toc-list-item::before {
+    background: #fff;
+}
