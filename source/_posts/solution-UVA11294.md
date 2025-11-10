@@ -2,6 +2,7 @@
 title: 题解：UVA11294 - Wedding
 date: 2025-03-27 16:40:00
 excerpt: 图论 2-SAT 强连通分量
+comment: 'utterances'
 categories: 
     - 题解
 tags: 

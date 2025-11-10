@@ -13,6 +13,7 @@ tags:
     - 字符串
     - 哈希
     - KMP
+comment: 'utterances'
 ---
 
 ## [A. LuoguP9981 - Minimum Longest Trip](https://www.luogu.com.cn/problem/P9981)

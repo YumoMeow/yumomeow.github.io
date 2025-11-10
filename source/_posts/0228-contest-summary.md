@@ -8,6 +8,7 @@ tags:
 	- 数据结构
 	- 线段树
 	- 分块
+comment: 'utterances'
 ---
 
 ## [A. CF1179C - Serge and Dining Room](https://codeforces.com/problemset/problem/1179/C)

@@ -2,6 +2,7 @@
 title: 题解：CF522D - Closest Equals
 date: 2025-02-26 19:45:00
 excerpt: 扫描线 数据结构 线段树
+comment: 'utterances'
 categories: 
 	- 题解
 tags: 

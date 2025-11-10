@@ -2,6 +2,7 @@
 title: 题解：CF1179C - Serge and Dining Room
 date: 2025-02-28 19:11:00
 excerpt: 数据结构 线段树
+comment: 'utterances'
 categories: 
 	- 题解
 tags: 

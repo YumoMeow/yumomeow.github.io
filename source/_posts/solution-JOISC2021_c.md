@@ -2,6 +2,7 @@
 title: 题解：JOISC2021C - フードコート
 date: 2025-02-25 19:47:00
 excerpt: 扫描线 数据结构 线段树
+comment: 'utterances'
 categories: 
     - 题解
 tags: 

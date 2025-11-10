@@ -10,6 +10,7 @@ tags:
     - 动态规划
     - 区间 DP
     - 数学
+comment: 'utterances'
 ---
 找了几个往年的 NOIP 真题来做。
 ## [A. LuoguP11362 - 遗失的赋值](https://www.luogu.com.cn/problem/P11362)

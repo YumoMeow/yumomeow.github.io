@@ -1005,6 +1005,7 @@ about:
     - { class: "iconfont icon-bilibili", link: "https://space.bilibili.com/539077277", tip: "Bilibili"}
     - { class: "iconfont icon-mail", link: "mailto:pink_dove@outlook.com", tip: "E-mail"}
     - { class: "iconfont icon-telegram-fill", link: "https://t.me/yumonya", tip: "Telegram"}
+    - { class: "iconfont icon-qq-fill", qrcode: '/img/qq.png', tip: "QQ"}
 
 #---------------------------
 # 自定义页
